@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@drawable/round_10_white_top"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/color_A6A6A6"
+                android:text="取消"
+                android:gravity="center"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+                <CheckBox
+                    android:id="@+id/btn_fixed_interval"
+                    android:layout_width="wrap_content"
+                    android:text="固定间隔"
+                    android:button="@null"
+                    android:textSize="17sp"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="@color/color_selector_black_grey"
+                    android:layout_height="match_parent"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:background="@color/color_E0E0E0"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="15dp"/>
+
+                <CheckBox
+                    android:id="@+id/btn_random_interval"
+                    android:layout_width="wrap_content"
+                    android:text="随机间隔"
+                    android:button="@null"
+                    android:textSize="17sp"
+                    android:paddingHorizontal="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/color_selector_black_grey"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/confirm"
+                android:layout_width="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="@color/color_33c197"
+                android:text="确定"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#e0e0e0"/>
+
+        <TextView
+            android:id="@+id/tv_interval_suggest"
+            android:layout_width="wrap_content"
+            android:textColor="@color/color_33c197"
+            android:layout_gravity="center_horizontal"
+            android:text="建议15s以上"
+            android:layout_marginTop="6dp"
+            android:textSize="12sp"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/multi_dialog_tv_left_title"
+                    android:layout_width="wrap_content"
+                    android:text="分"
+                    android:textSize="17sp"
+                    android:textColor="@color/color_454545"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"/>
+
+                <com.zyyoona7.wheel.WheelView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/wheelview"
+                    android:layout_gravity="center_horizontal"
+                    app:wv_textSize="37sp"
+                    app:wv_sidetextSize="28sp"
+                    app:wv_sidetextSize2="17sp"
+                    app:wv_cyclic="true"
+                    app:wv_normalItemTextColor="#454545"
+                    app:wv_selectedItemTextColor="#33C197"
+                    app:wv_side_normalItemTextColor="#a5a5a5"
+                    app:wv_lineSpacing="0dp"
+                    app:wv_textBoundaryMargin="0dp"
+                    app:wv_curved="false"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/multi_dialog_tv_right_title"
+                    android:layout_width="wrap_content"
+                    android:text="秒"
+                    android:textSize="17sp"
+                    android:textColor="@color/color_454545"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"/>
+
+                <com.zyyoona7.wheel.WheelView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/wheelview2"
+                    android:layout_gravity="center_horizontal"
+                    app:wv_textSize="37sp"
+                    app:wv_sidetextSize="28sp"
+                    app:wv_sidetextSize2="17sp"
+                    app:wv_cyclic="true"
+                    app:wv_normalItemTextColor="#454545"
+                    app:wv_selectedItemTextColor="#33C197"
+                    app:wv_side_normalItemTextColor="#a5a5a5"
+                    app:wv_lineSpacing="0dp"
+                    app:wv_textBoundaryMargin="0dp"
+                    app:wv_curved="false"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,4 @@
+include ':picker'
+include ':wheelview'
+include ':app'
+rootProject.name = "Mob"

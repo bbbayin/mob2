@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/top_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="40dp">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/top_tv"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="A" />-->
+    <!--    </LinearLayout>-->
+
+    <com.mob.sms2.contacts.SideBar
+        android:id="@+id/sidebar"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp" />
+
+    <ImageView
+        android:id="@+id/btn_toggle_dial_keyboard"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/keyboard_icon" />
+</RelativeLayout>

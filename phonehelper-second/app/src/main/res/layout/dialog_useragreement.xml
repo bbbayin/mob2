@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/round_10_white"
+        android:layout_height="350dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:text="《服务协议》和《隐私政策》"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:textColor="#454545"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_below="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_above="@+id/bottom_ll"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dialog_tv_policy"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15sp"
+                    android:textColor="#454545"
+                    android:text=""
+                    android:layout_marginRight="17dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </ScrollView>
+        
+        <LinearLayout
+            android:id="@+id/bottom_ll"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_height="50dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:background="#e0e0e0"
+                android:layout_height="1px"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="49dp">
+
+                <TextView
+                    android:id="@+id/refuse"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="拒绝"
+                    android:textSize="19sp"
+                    android:textColor="#454545"
+                    android:gravity="center"
+                    android:layout_height="match_parent"/>
+
+                <View
+                    android:layout_width="1px"
+                    android:background="#e0e0e0"
+                    android:layout_height="match_parent"/>
+
+                <TextView
+                    android:id="@+id/agree"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="同意"
+                    android:textSize="19sp"
+                    android:textColor="#1577FF"
+                    android:gravity="center"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

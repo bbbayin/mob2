@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/green">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="20dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="通讯录"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_rl"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/title_rl"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/contacts_et_search"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/round_36_grey2"
+            android:hint="搜索"
+            android:paddingLeft="15dp"
+            android:textColor="#a8a8a8"
+            android:textColorHint="#BBBBBB"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_rl" />
+
+
+    <TextView
+        android:id="@+id/contacts_empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="暂无结果"
+        android:textColor="#999999"
+        android:layout_below="@+id/search_rl"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/search_rl">
+
+        <TextView
+            android:id="@+id/top_tv"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#E7E7E7"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="A"
+            android:textColor="@color/color_454545"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <com.mob.sms2.contacts.SideBar
+        android:id="@+id/sidebar"
+        android:layout_width="25dp"
+        android:layout_height="375dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="87dp" />
+
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/round_36_green"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+</RelativeLayout>

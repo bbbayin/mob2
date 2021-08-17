@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_rl"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_E0E0E0"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/unselected_icon"
+            android:id="@+id/select_iv"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="10dp"
+            android:paddingHorizontal="10dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/select_iv"
+            android:textColor="@color/color_454545"
+            android:text="全选"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="80dp"
+            android:gravity="center"
+            android:background="@drawable/round_18_red"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="删除(0)"
+            android:layout_height="35dp"/>
+    </RelativeLayout>
+</RelativeLayout>

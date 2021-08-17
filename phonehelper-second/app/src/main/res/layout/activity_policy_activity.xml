@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/green"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:id="@+id/policy_bt_back"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:src="@mipmap/back_white"
+            android:scaleType="centerInside"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/policy_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/policy_webview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

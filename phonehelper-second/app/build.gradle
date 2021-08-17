@@ -1,0 +1,225 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        multiDexEnabled = true
+        applicationId "com.mob.sms2"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 130
+        versionName "1.0"
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        preDexLibraries false
+        incremental false
+        javaMaxHeapSize "4g"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("mob2.jks")   //你的发布用keystore
+            storePassword "mob123456" //你的store密码
+            keyAlias "mob2"  //别名
+            keyPassword "mob123456"  //别名密码
+
+            //百度云Access Key fe205c344a4d4a2cae7fb8bb10dec20d    Secret Key 1af0a6a68be34c5985b456123721a4b1
+        }
+        release {
+            storeFile file("mob2.jks")   //你的发布用keystore
+            storePassword "mob123456" //你的store密码
+            keyAlias "mob2"  //别名
+            keyPassword "mob123456"  //别名密码
+
+            //百度云Access Key fe205c344a4d4a2cae7fb8bb10dec20d    Secret Key 1af0a6a68be34c5985b456123721a4b1
+        }
+    }
+
+//    flavorDimensions "default"
+//
+//    productFlavors {
+//        huawei {
+//
+//        }
+//        yingyongbao {
+//
+//        }
+//
+//        mobile_360 {
+//
+//        }
+//        anzhi {
+//
+//        }
+//        baidu {
+//
+//        }
+//        jinli {
+//
+//        }
+//        lianxiang {
+//
+//        }
+//        meizu {
+//
+//        }
+//        mumayi {
+//
+//        }
+//        oppo {
+//
+//        }
+//        vivo{
+//
+//        }
+//        sanxing {
+//
+//        }
+//        sougou {
+//
+//        }
+//        wandoujia {
+//
+//        }
+//        xiaomi {
+//
+//        }
+//        yingyonghui {
+//
+//        }
+//        qita1 {
+//
+//        }
+//        qita2 {
+//
+//        }
+//    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation files('libs\\fastjson-1.2.58.jar')
+
+
+    implementation files('libs/MagicIndicator-1.5.0.aar')
+    implementation files("libs/keepalive-release.aar")
+    implementation files("libs/alipaysdk.aar")
+
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
+    // butterknife∏
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    implementation files('libs/umeng-share-core-7.1.3.jar')
+    implementation files('libs/umeng-share-QQ-full-7.1.3.jar')
+    implementation files('libs/umeng-share-wechat-full-7.1.3.jar')
+    implementation files('libs/umeng-shareboard-widget-7.1.3.jar')
+    implementation files('libs/umeng-sharetool-7.1.3.jar')
+//    implementation files('libs/rt.jar')
+//    implementation files('libs/aa-poi-3.10-min-0.1.5.jar')
+//    implementation files('libs/aa-poi-ooxml-schemas-3.10-reduced-more-0.1.5.jar')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    def poiversion = '3.17'
+    implementation(group: 'org.apache.poi', name: 'poi', version: poiversion) {
+        exclude group: 'org.apache.xmlbeans'
+    }
+    implementation(group: 'org.apache.poi', name: 'poi-ooxml', version: poiversion) {
+        exclude group: 'org.apache.xmlbeans'
+    }
+    implementation(group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: poiversion) {
+        exclude group: 'org.apache.xmlbeans'
+    }
+    implementation(group: 'org.apache.poi', name: 'poi-scratchpad', version: poiversion) {
+        exclude group: 'org.apache.xmlbeans'
+    }
+//    implementation group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '2.6.0'
+    implementation group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.0.0'
+
+
+    //rxjava
+    implementation 'io.reactivex:rxandroid:1.1.0'
+    implementation 'io.reactivex:rxjava:1.1.0'
+
+    //network
+    implementation 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+
+    implementation 'com.youth.banner:banner:2.1.0'
+
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+    //ormlite
+    implementation files('libs/ormlite-core-4.42-SNAPSHOT.jar')
+    implementation files('libs/ormlite-android-4.42-SNAPSHOT.jar')
+
+    // 图片加载
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    annotationProcessor 'androidx.annotation:annotation:1.1.0'
+    implementation project(':picker')
+
+    implementation 'com.google.zxing:core:3.3.0'
+
+    implementation 'com.github.limxing:Android-PromptDialog:1.1.3'
+
+//    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.android.support:design:29.0.0'
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata', version: '2.0.0'
+
+    // umeng
+    implementation  'com.umeng.umsdk:common:9.3.8'// 必选
+    implementation  'com.umeng.umsdk:asms:1.2.2'// 必选
+
+}
+
+repositories {
+    mavenCentral()
+}

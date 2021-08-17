@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dxds_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/sms_single_send_switch"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/sms_iv"
+            style="@style/HomeLeftIcon"
+            android:background="@mipmap/sms_icon" />
+
+        <TextView
+            style="@style/HomeItemText"
+            android:text="单号发送" />
+
+        <ImageView
+            android:id="@+id/dhfs_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/switch_on" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="#e0e0e0" />
+
+    <LinearLayout
+        android:id="@+id/dhfs_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                android:id="@+id/sms_txl_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/lxr_icon" />
+
+            <TextView
+                style="@style/HomeItemText"
+                android:layout_marginStart="4dp"
+                android:text="请输入号码:" />
+
+            <EditText
+                android:id="@+id/sms_mobile_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入手机号码"
+                android:inputType="number"
+                android:paddingStart="10dp"
+                android:textColor="@color/color_454545"
+                android:textColorHint="@color/color_A6A6A6"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/sms_iv_clear_phone"
+                style="@style/ClearBtn"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="#e0e0e0" />
+
+        <LinearLayout
+            android:id="@+id/sms_dsfs_rl"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                style="@style/HomeLeftIcon"
+                android:background="@mipmap/bdjg_icon" />
+
+            <TextView
+                style="@style/HomeItemText"
+                android:layout_marginStart="4dp"
+                android:text="定时发送" />
+
+            <TextView
+                android:id="@+id/sms_dsfs_tip"
+                style="@style/HomeItemHintText"
+                android:layout_width="0dp"
+                android:gravity="end"
+                android:layout_weight="1" />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/sms_iv_clear_timeout"-->
+<!--                style="@style/ClearBtn"-->
+<!--                android:layout_marginEnd="6dp"-->
+<!--                android:visibility="gone" />-->
+
+            <ImageView
+                android:id="@+id/sms_dsfs_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/right_arrow_grey" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="#e0e0e0" />
+
+        <LinearLayout
+            android:id="@+id/sms_fscs_rl"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                style="@style/HomeLeftIcon"
+                android:background="@mipmap/dsbh_icon" />
+
+            <TextView
+                style="@style/HomeItemText"
+                android:layout_marginStart="4dp"
+                android:text="发送次数" />
+
+            <TextView
+                android:id="@+id/sms_fscs_tip"
+                style="@style/HomeItemHintText"
+                android:gravity="end"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/sms_fscs_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/right_arrow_grey" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="#e0e0e0" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/sms_multi_send_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <ImageView
+            android:id="@+id/plfs_iv"
+            style="@style/HomeLeftIcon"
+            android:background="@mipmap/plfs_icon" />
+
+        <TextView
+            style="@style/HomeItemText"
+            android:text="批量发送" />
+
+        <ImageView
+            android:id="@+id/plfs_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/switch_off" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="#e0e0e0" />
+
+    <LinearLayout
+        android:id="@+id/plfs_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/sms_hmdr_rl"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:paddingEnd="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="号码导入:"
+                android:textColor="@color/color_454545"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/sms_hmdr_tip"
+                style="@style/HomeItemHintText"
+                android:paddingStart="10dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/sms_btn_clear_phone"
+                style="@style/ClearBtn" />
+
+            <ImageView
+                android:id="@+id/sms_hmdr_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/right_arrow_grey" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="#e0e0e0" />
+
+        <RelativeLayout
+            android:id="@+id/sms_sksz_rl"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="双卡设置"
+                android:textColor="@color/color_454545"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/sms_sksz_tip"
+                style="@style/HomeItemHintText"
+                android:layout_toLeftOf="@+id/sms_sksz_arrow" />
+
+            <ImageView
+                android:id="@+id/sms_sksz_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/right_arrow_grey" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="#e0e0e0" />
+
+        <RelativeLayout
+            android:id="@+id/sms_fsjg_rl"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:text="发送间隔"
+                android:textColor="@color/color_454545"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/sms_fsjg_tip"
+                style="@style/HomeItemHintText"
+                android:layout_toLeftOf="@+id/sms_fsjg_arrow" />
+
+            <ImageView
+                android:id="@+id/sms_fsjg_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/right_arrow_grey" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="#e0e0e0" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/bjdx_rl"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <ImageView
+            android:id="@+id/bjdx_iv"
+            style="@style/HomeLeftIcon"
+            android:background="@mipmap/bjdx_icon" />
+
+        <TextView
+            style="@style/HomeItemText"
+            android:text="编辑短信" />
+
+        <TextView
+            android:id="@+id/bjdx_tip"
+            style="@style/HomeItemHintText"
+            android:layout_toLeftOf="@+id/bjdx_arrow" />
+
+        <ImageView
+            android:id="@+id/bjdx_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@mipmap/right_arrow_grey" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="#e0e0e0" />
+
+    <TextView
+        android:id="@+id/sms_ljfs"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/round_36_grey"
+        android:gravity="center"
+        android:text="立即发送"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+</LinearLayout>

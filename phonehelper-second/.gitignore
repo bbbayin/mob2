@@ -1,0 +1,5 @@
+.gradle
+.idea
+app/build/
+picker/build/
+wheelview/build/

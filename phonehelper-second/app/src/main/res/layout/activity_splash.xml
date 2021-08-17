@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:banner_auto_loop="false"
+        app:banner_indicator_gravity="center"
+        app:banner_indicator_height="12dp"
+        app:banner_indicator_marginBottom="38dp"
+        app:banner_indicator_normal_color="#D9D9D9"
+        app:banner_indicator_normal_width="8dp"
+        app:banner_indicator_selected_color="#8BBEFA"
+        app:banner_indicator_selected_width="12dp"
+        app:banner_indicator_space="10dp"
+        app:banner_infinite_loop="false" />
+
+    <ImageView
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@mipmap/skip" />
+
+    <RelativeLayout
+        android:id="@+id/welcome_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="185dp"
+            android:background="@mipmap/logo" />
+
+        <ImageView
+            android:id="@+id/splash_image"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/logo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_below="@+id/logo"
+            android:textColor="@color/color_33c197"
+            android:text="隐藏拨号"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+</RelativeLayout>

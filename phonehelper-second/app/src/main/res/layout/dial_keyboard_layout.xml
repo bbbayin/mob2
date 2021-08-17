@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EAE8E8"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="24dp">
+
+    <TextView
+        android:id="@+id/dial_keyboard_input"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/shape_dial_key_bg"
+        android:gravity="center"
+        android:maxLength="11"
+        android:singleLine="true"
+        android:textColor="#222"
+        android:textSize="26sp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dial_keyboard_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/round_36_green"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dial_sim_1"
+            style="@style/DialBtnText"
+            android:text="卡1拨打" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/dial_sim_secret"
+            style="@style/DialBtnText"
+            android:visibility="gone"
+            android:text="隐私拨号" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/dial_sim_2"
+            style="@style/DialBtnText"
+            android:text="卡2拨打" />
+    </LinearLayout>
+</LinearLayout>

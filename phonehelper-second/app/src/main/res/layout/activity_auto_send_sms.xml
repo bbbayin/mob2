@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/color_E7E7E7"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/green"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:src="@mipmap/back_white"
+            android:scaleType="centerInside"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="自动发送短信"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:paddingHorizontal="20dp"
+            android:text="结束"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:background="@drawable/round_10_white"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tip"
+                    android:layout_width="wrap_content"
+                    android:text="单号发送短信"
+                    android:layout_margin="10dp"
+                    android:textSize="17sp"
+                    android:textColor="@color/color_454545"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/mobile"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/color_454545"
+                    android:textSize="25sp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="18856548956"
+                    android:layout_marginTop="54dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/num"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:text="(1/10次)"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/color_A6A6A6"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:text="下一次发送还需要15s"
+                    android:layout_marginTop="14dp"
+                    android:textColor="#23B58A"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="27dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/success_num"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_454545"
+                            android:layout_gravity="center_horizontal"
+                            android:text="0"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_454545"
+                            android:layout_gravity="center_horizontal"
+                            android:text="发送成功"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/fail_num"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_454545"
+                            android:layout_gravity="center_horizontal"
+                            android:text="0"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_454545"
+                            android:layout_gravity="center_horizontal"
+                            android:text="发送失败"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/pre"
+                        android:layout_width="wrap_content"
+                        android:text="发送\n上一个"
+                        android:textSize="15sp"
+                        android:textColor="#23B58A"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/pause"
+                        android:layout_width="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/pause"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/next"
+                        android:layout_width="wrap_content"
+                        android:text="发送\n下一个"
+                        android:textSize="15sp"
+                        android:textColor="#23B58A"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/record_ll"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="9dp"
+                android:visibility="gone"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/round_10_white"
+                android:layout_marginBottom="9dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="@color/color_454545"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="发送记录"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
