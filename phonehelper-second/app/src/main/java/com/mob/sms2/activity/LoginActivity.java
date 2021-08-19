@@ -105,7 +105,7 @@ public class LoginActivity extends BaseActivity {
         int end1 = content.indexOf("》");
         int start2 = content.lastIndexOf("《");
         int end2 = content.length();
-        int color = Color.parseColor("#33C197");
+        int color = getColor(R.color.colorPrimary);
         spannableString.setSpan(new ForegroundColorSpan(color),
                 start1,
                 end1 + 1,

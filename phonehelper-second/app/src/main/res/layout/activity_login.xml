@@ -155,15 +155,8 @@
 
         <TextView
             android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/selector_login_btn_bg"
-            android:gravity="center"
-            android:text="登录"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            style="@style/common_big_button_style"
+            android:text="登录" />
 
         <TextView
             android:layout_width="wrap_content"

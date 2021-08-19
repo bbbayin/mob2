@@ -26,6 +26,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.mob.sms2.R;
 import com.mob.sms2.base.BaseActivity;
 import com.mob.sms2.dialog.UserAgreementDialog;
@@ -56,17 +57,9 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.select_iv)
     ImageView mSelectIv;
     @BindView(R.id.register)
-    ImageView mRegister;
+    TextView mBtnRegister;
     @BindView(R.id.register_policy)
     TextView tvPolicy;
-
-
-    @OnClick({R.id.register_back})
-    public void click(View view) {
-        if (view.getId() == R.id.register_back) {
-            finish();
-        }
-    }
 
     private boolean mCanSeePwd;
     private boolean mCanSeePwd2;
@@ -88,6 +81,7 @@ public class RegisterActivity extends BaseActivity {
         setStatusBar(getResources().getColor(R.color.white));
         initView();
         initPolicy();
+        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).init();
     }
     private void initPolicy() {
         String content = "我已阅读并同意《用户协议》和《隐私政策》";
@@ -167,7 +161,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     mCanRegister = false;
                 }
-                mRegister.setBackgroundResource(mCanRegister?R.mipmap.register_green:R.mipmap.register_grey);
+                mBtnRegister.setEnabled(mCanRegister);
             }
 
             @Override
@@ -193,7 +187,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     mCanRegister = false;
                 }
-                mRegister.setBackgroundResource(mCanRegister?R.mipmap.register_green:R.mipmap.register_grey);
+                mBtnRegister.setEnabled(mCanRegister);
             }
 
             @Override
@@ -219,7 +213,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     mCanRegister = false;
                 }
-                mRegister.setBackgroundResource(mCanRegister?R.mipmap.register_green:R.mipmap.register_grey);
+                mBtnRegister.setEnabled(mCanRegister);
             }
 
             @Override
@@ -245,7 +239,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     mCanRegister = false;
                 }
-                mRegister.setBackgroundResource(mCanRegister?R.mipmap.register_green:R.mipmap.register_grey);
+                mBtnRegister.setEnabled(mCanRegister);
             }
 
             @Override
@@ -283,7 +277,9 @@ public class RegisterActivity extends BaseActivity {
                 mEye2Icon.setBackgroundResource(mCanSeePwd2?R.mipmap.eye_icon:R.mipmap.eye2_icon);
                 break;
             case R.id.login:
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.register:
@@ -313,7 +309,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     mCanRegister = false;
                 }
-                mRegister.setBackgroundResource(mCanRegister?R.mipmap.register_green:R.mipmap.register_grey);
+                mBtnRegister.setEnabled(mCanRegister);
             }
 
             @Override
@@ -327,7 +323,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     mCanRegister = false;
                 }
-                mRegister.setBackgroundResource(mCanRegister?R.mipmap.register_green:R.mipmap.register_grey);
+                mBtnRegister.setEnabled(mCanRegister);
             }
         });
     }
