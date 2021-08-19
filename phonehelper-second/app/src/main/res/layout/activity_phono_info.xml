@@ -52,7 +52,7 @@
             android:layout_height="25dp"
             android:paddingLeft="22dp"
             android:textSize="15sp"
-            android:background="@color/color_E7E7E7"
+            android:background="@color/color_divider"
             android:textColor="@color/color_A6A6A6"
             android:gravity="center_vertical"/>
 

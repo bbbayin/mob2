@@ -119,7 +119,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="22dp"
                             android:text="隐私拨号使用"
-                            android:textColor="#33C197"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="10sp" />
 
                         <ProgressBar

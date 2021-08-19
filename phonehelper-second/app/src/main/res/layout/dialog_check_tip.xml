@@ -53,7 +53,7 @@
                 android:gravity="center"
                 android:visibility="gone"
                 android:text="取消"
-                android:textColor="#33C197"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15sp" />
 
             <View
@@ -71,7 +71,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="确定"
-                android:textColor="#33C197"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15sp" />
         </LinearLayout>
 

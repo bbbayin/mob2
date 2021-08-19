@@ -25,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.mob.sms2.R;
 import com.mob.sms2.application.MyApplication;
 import com.mob.sms2.base.BaseActivity;
@@ -58,7 +59,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.eye_icon)
     ImageView mEyeIcon;
     @BindView(R.id.login)
-    ImageView mLoginIv;
+    TextView mBtnLogin;
     @BindView(R.id.wx_tip)
     TextView mWxTip;
     @BindView(R.id.qq_tip)
@@ -94,6 +95,7 @@ public class LoginActivity extends BaseActivity {
         sdkManager = new SDKManager();
         sdkManager.addObserver(MyApplication.mApplication);
         umShareAPI = UMShareAPI.get(this);
+        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).init();
     }
 
     private void initPolicy() {
@@ -178,7 +180,7 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     mCanLogin = false;
                 }
-                mLoginIv.setBackgroundResource(mCanLogin ? R.mipmap.login_bg_green : R.mipmap.login_bg_grey);
+                mBtnLogin.setEnabled(mCanLogin);
             }
 
             @Override
@@ -204,7 +206,7 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     mCanLogin = false;
                 }
-                mLoginIv.setBackgroundResource(mCanLogin ? R.mipmap.login_bg_green : R.mipmap.login_bg_grey);
+                mBtnLogin.setEnabled(mCanLogin);
             }
 
             @Override
@@ -331,11 +333,10 @@ public class LoginActivity extends BaseActivity {
         mSelectIv.setBackgroundResource(enable ? R.mipmap.selected_icon : R.mipmap.unselected_icon);
         if (mTxMobile && mTxPwd && enable) {
             mCanLogin = true;
-            mLoginIv.setBackgroundResource(R.mipmap.login_bg_green);
         } else {
             mCanLogin = false;
-            mLoginIv.setBackgroundResource(R.mipmap.login_bg_grey);
         }
+        mBtnLogin.setEnabled(mCanLogin);
     }
 
     private void showPolicyDialog() {
@@ -352,7 +353,7 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     mCanLogin = false;
                 }
-                mLoginIv.setBackgroundResource(mCanLogin ? R.mipmap.login_bg_green : R.mipmap.login_bg_grey);
+                mBtnLogin.setEnabled(mCanLogin);
                 SPUtils.put(SPConstant.SP_USER_PERMISSION_OK, true);
                 sdkManager.init();
             }
@@ -366,7 +367,7 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     mCanLogin = false;
                 }
-                mLoginIv.setBackgroundResource(mCanLogin ? R.mipmap.login_bg_green : R.mipmap.login_bg_grey);
+                mBtnLogin.setEnabled(mCanLogin);
             }
         });
     }

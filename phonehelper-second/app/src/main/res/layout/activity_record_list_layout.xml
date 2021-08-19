@@ -38,7 +38,7 @@
             android:id="@+id/num"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:background="@color/color_E7E7E7"
+            android:background="@color/color_divider"
             android:gravity="center_vertical"
             android:paddingLeft="22dp"
             android:textColor="@color/color_A6A6A6"

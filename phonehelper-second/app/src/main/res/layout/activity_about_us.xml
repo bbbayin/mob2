@@ -34,13 +34,13 @@
     <ImageView
         android:layout_width="60dp"
         android:layout_marginTop="38dp"
-        android:background="@mipmap/logo"
+        android:background="@mipmap/ic_launcher"
         android:layout_gravity="center_horizontal"
         android:layout_height="60dp"/>
     
     <View
         android:layout_width="match_parent"
-        android:background="@color/color_E7E7E7"
+        android:background="@color/color_divider"
         android:layout_marginTop="40dp"
         android:layout_height="10dp"/>
 

@@ -27,8 +27,8 @@
             <shape>
                 <corners android:radius="5dp" />
                 <gradient
-                    android:endColor="#33C197"
-                    android:startColor="#33C197" />
+                    android:endColor="@color/colorPrimary"
+                    android:startColor="@color/colorPrimary" />
             </shape>
         </scale>
     </item>

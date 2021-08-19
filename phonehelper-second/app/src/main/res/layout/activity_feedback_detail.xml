@@ -65,7 +65,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_marginTop="15dp"
-                    android:background="@color/color_E7E7E7"
+                    android:background="@color/color_divider"
                     android:layout_height="10dp"/>
 
                 <TextView
