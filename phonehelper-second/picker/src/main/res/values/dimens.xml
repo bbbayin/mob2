@@ -3,4 +3,6 @@
 
     <dimen name="date_picker_view_margins">8dp</dimen>
     <dimen name="login_item_height">60dp</dimen>
+    <dimen name="circle_offset">8dp</dimen>
+    <dimen name="circle_offset_inner">18dp</dimen>
 </resources>

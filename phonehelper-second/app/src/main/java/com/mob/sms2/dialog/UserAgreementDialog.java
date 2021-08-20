@@ -64,11 +64,12 @@ public class UserAgreementDialog extends Dialog {
         int end1 = content.indexOf("》");
         int start2 = content.lastIndexOf("《");
         int end2 = content.lastIndexOf("》");
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#00C296")),
+        int color = getContext().getColor(R.color.colorPrimary);
+        spannableString.setSpan(new ForegroundColorSpan(color),
                 start1,
                 end1+1,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#00C296")),
+        spannableString.setSpan(new ForegroundColorSpan(color),
                 start2,
                 end2+1,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

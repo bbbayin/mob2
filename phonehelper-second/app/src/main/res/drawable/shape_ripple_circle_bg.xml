@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/shape_primary_circle_2" />
+
+    <item
+        android:drawable="@drawable/shape_primary_circle_1"
+        android:bottom="@dimen/circle_offset"
+        android:left="@dimen/circle_offset"
+        android:right="@dimen/circle_offset"
+        android:top="@dimen/circle_offset" />
+
+    <item android:drawable="@drawable/shape_primary_circle"
+        android:bottom="@dimen/circle_offset_inner"
+        android:left="@dimen/circle_offset_inner"
+        android:right="@dimen/circle_offset_inner"
+        android:top="@dimen/circle_offset_inner"/>
+</layer-list>

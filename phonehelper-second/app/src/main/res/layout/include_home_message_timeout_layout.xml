@@ -359,14 +359,7 @@
 
     <TextView
         android:id="@+id/sms_ljfs"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/round_36_grey"
-        android:gravity="center"
+        style="@style/common_big_corner_button_style"
         android:text="立即发送"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        />
 </LinearLayout>

@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -92,12 +94,6 @@ public class HomeFragment extends BaseFragment {
     LinearLayout plbd_ll;
     @BindView(R.id.dxds_ll)
     LinearLayout dxds_ll;
-    @BindView(R.id.bddh_iv)
-    ImageView bddh_iv;
-    @BindView(R.id.plbd_iv)
-    ImageView plbd_iv;
-    @BindView(R.id.dxds_iv)
-    ImageView dxds_iv;
     //电话
     @BindView(R.id.call_mobile_et)
     EditText mCallMobileEt;
@@ -165,12 +161,6 @@ public class HomeFragment extends BaseFragment {
     ImageView ivClearSmsImportPhone;
     @BindView(R.id.banner)
     Banner banner;
-    @BindView(R.id.top1_ll)
-    View singleCallBtn;
-    @BindView(R.id.top2_ll)
-    View multiCallBtn;
-    @BindView(R.id.top3_ll)
-    View smsSendBtn;
     @BindView(R.id.home_error_layout)
     View homeErrorLayout;
     @BindView(R.id.home_tv_error_msg)
@@ -187,6 +177,15 @@ public class HomeFragment extends BaseFragment {
     View smsSingleSendSwitch;// 单号发送开关
     @BindView(R.id.msg_flipper)
     LinearLayout msgContainer;
+    @BindView(R.id.home_radio_group)
+    RadioGroup radioGroup;
+    @BindView(R.id.home_radio_call_phone)
+    RadioButton rbCallPhone;
+    @BindView(R.id.home_radio_multi_call)
+    RadioButton rbMultiCall;
+    @BindView(R.id.home_radio_send_msg)
+    RadioButton rbSendMsg;
+
 
     private final int REQUEST_CODE_TAB1_SRHM = 1;
     private final int REQUEST_CODE_TAB1_CALL_TYPE = 2;
@@ -275,30 +274,30 @@ public class HomeFragment extends BaseFragment {
                             switch (config.id) {
                                 case 1:// 单号
                                     if (TextUtils.equals(config.status, "1")) {
-                                        singleCallBtn.setVisibility(View.VISIBLE);
+                                        rbCallPhone.setVisibility(View.VISIBLE);
                                         activeId = 1;
                                         // 获取隐藏配置
 
                                     } else {
-                                        singleCallBtn.setVisibility(View.GONE);
+                                        rbCallPhone.setVisibility(View.GONE);
                                         bddh_ll.setVisibility(View.GONE);
                                     }
                                     break;
                                 case 2:// 批量
                                     if (TextUtils.equals(config.status, "1")) {
-                                        multiCallBtn.setVisibility(View.VISIBLE);
+                                        rbMultiCall.setVisibility(View.VISIBLE);
                                         activeId = (activeId < 0 ? 2 : activeId);
                                     } else {
-                                        multiCallBtn.setVisibility(View.GONE);
+                                        rbMultiCall.setVisibility(View.GONE);
                                         plbd_ll.setVisibility(View.GONE);
                                     }
                                     break;
                                 case 3:// 短信
                                     if (TextUtils.equals(config.status, "1")) {
-                                        smsSendBtn.setVisibility(View.VISIBLE);
+                                        rbSendMsg.setVisibility(View.VISIBLE);
                                         activeId = (activeId < 0 ? 3 : activeId);
                                     } else {
-                                        smsSendBtn.setVisibility(View.GONE);
+                                        rbSendMsg.setVisibility(View.GONE);
                                         dxds_ll.setVisibility(View.GONE);
                                     }
                                     break;
@@ -368,9 +367,6 @@ public class HomeFragment extends BaseFragment {
     private void errorLayout(String errorMsg) {
         homeErrorLayout.setVisibility(View.VISIBLE);
         tvErrorMsg.setText(errorMsg);
-        singleCallBtn.setVisibility(View.GONE);
-        multiCallBtn.setVisibility(View.GONE);
-        smsSendBtn.setVisibility(View.GONE);
         dxds_ll.setVisibility(View.GONE);
         plbd_ll.setVisibility(View.GONE);
         bddh_ll.setVisibility(View.GONE);
@@ -479,6 +475,29 @@ public class HomeFragment extends BaseFragment {
 
         mPlCallGd = (boolean) SPUtils.get(SPConstant.SP_CALL_PL_GD, false);
         mPlGdSwitch.setImageResource(mPlCallGd ? R.mipmap.switch_on : R.mipmap.switch_off);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.home_radio_call_phone) {
+                    mVisibleTab = 0;
+                    bddh_ll.setVisibility(View.VISIBLE);
+                    plbd_ll.setVisibility(View.GONE);
+                    dxds_ll.setVisibility(View.GONE);
+                } else if (checkedId == R.id.home_radio_multi_call) {
+                    mVisibleTab = 1;
+                    bddh_ll.setVisibility(View.GONE);
+                    plbd_ll.setVisibility(View.VISIBLE);
+                    dxds_ll.setVisibility(View.GONE);
+                } else if (checkedId == R.id.home_radio_send_msg) {
+                    mVisibleTab = 2;
+                    bddh_ll.setVisibility(View.GONE);
+                    plbd_ll.setVisibility(View.GONE);
+                    dxds_ll.setVisibility(View.VISIBLE);
+                    changeSmsUi();
+                }
+            }
+        });
     }
 
     private void setBdfs() {
@@ -494,30 +513,24 @@ public class HomeFragment extends BaseFragment {
 
     private void selectFunc(int id) {
         if (id == 1) {
-            bddh_iv.setBackgroundResource(R.mipmap.bddh_green);
-            plbd_iv.setBackgroundResource(R.mipmap.plbd_grey);
-            dxds_iv.setBackgroundResource(R.mipmap.dxds_grey);
+            radioGroup.check(R.id.home_radio_call_phone);
             bddh_ll.setVisibility(View.VISIBLE);
             plbd_ll.setVisibility(View.GONE);
             dxds_ll.setVisibility(View.GONE);
         } else if (id == 2) {
-            bddh_iv.setBackgroundResource(R.mipmap.bddh_green);
-            plbd_iv.setBackgroundResource(R.mipmap.plbd_green);
-            dxds_iv.setBackgroundResource(R.mipmap.dxds_grey);
+            radioGroup.check(R.id.home_radio_multi_call);
             bddh_ll.setVisibility(View.GONE);
             plbd_ll.setVisibility(View.VISIBLE);
             dxds_ll.setVisibility(View.GONE);
         } else if (id == 3) {
-            bddh_iv.setBackgroundResource(R.mipmap.bddh_grey);
-            plbd_iv.setBackgroundResource(R.mipmap.plbd_grey);
-            dxds_iv.setBackgroundResource(R.mipmap.dxds_green);
+            radioGroup.check(R.id.home_radio_send_msg);
             bddh_ll.setVisibility(View.GONE);
             plbd_ll.setVisibility(View.GONE);
             dxds_ll.setVisibility(View.VISIBLE);
         }
     }
 
-    @OnClick({R.id.top1_ll, R.id.top2_ll, R.id.top3_ll, R.id.txl_iv, R.id.dsbh_rl, R.id.bdcs_rl, R.id.bdjg_rl, R.id.bdfs_rl,
+    @OnClick({R.id.txl_iv, R.id.dsbh_rl, R.id.bdcs_rl, R.id.bdjg_rl, R.id.bdfs_rl,
             R.id.gd_switch, R.id.home_btn_single_call_now,
             R.id.hmdr_rl, R.id.skzs_rl, R.id.jgsz_rl, R.id.pl_switch_gd, R.id.pl_call_tv,
             R.id.dhfs_switch, R.id.sms_txl_iv, R.id.sms_dsfs_rl, R.id.sms_fscs_rl, R.id.plfs_switch,
@@ -567,34 +580,6 @@ public class HomeFragment extends BaseFragment {
                 mCallMobileEt.setText("");
                 ivClearSinglePhoneNumber.setVisibility(View.GONE);
                 changeCallUi();
-                break;
-            case R.id.top1_ll:
-                mVisibleTab = 0;
-                bddh_ll.setVisibility(View.VISIBLE);
-                plbd_ll.setVisibility(View.GONE);
-                dxds_ll.setVisibility(View.GONE);
-                bddh_iv.setBackgroundResource(R.mipmap.bddh_green);
-                plbd_iv.setBackgroundResource(R.mipmap.plbd_grey);
-                dxds_iv.setBackgroundResource(R.mipmap.dxds_grey);
-                break;
-            case R.id.top2_ll:
-                mVisibleTab = 1;
-                bddh_ll.setVisibility(View.GONE);
-                plbd_ll.setVisibility(View.VISIBLE);
-                dxds_ll.setVisibility(View.GONE);
-                bddh_iv.setBackgroundResource(R.mipmap.bddh_grey);
-                plbd_iv.setBackgroundResource(R.mipmap.plbd_green);
-                dxds_iv.setBackgroundResource(R.mipmap.dxds_grey);
-                break;
-            case R.id.top3_ll:
-                mVisibleTab = 2;
-                bddh_ll.setVisibility(View.GONE);
-                plbd_ll.setVisibility(View.GONE);
-                dxds_ll.setVisibility(View.VISIBLE);
-                bddh_iv.setBackgroundResource(R.mipmap.bddh_grey);
-                plbd_iv.setBackgroundResource(R.mipmap.plbd_grey);
-                dxds_iv.setBackgroundResource(R.mipmap.dxds_green);
-                changeSmsUi();
                 break;
             case R.id.txl_iv:
                 Intent intent = new Intent(getContext(), ContactsActivity.class);
@@ -661,7 +646,7 @@ public class HomeFragment extends BaseFragment {
                             }
                         }
                     });
-                }else  {
+                } else {
                     ToastUtil.show("请设置正确的号码");
                 }
                 break;
@@ -765,7 +750,7 @@ public class HomeFragment extends BaseFragment {
                             }
                         }
                     });
-                }else {
+                } else {
                     ToastUtil.show("请设置正确的间隔和号码");
                 }
                 break;
@@ -927,7 +912,7 @@ public class HomeFragment extends BaseFragment {
         if (requestCode == 999) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 autoSendSms();
-            }else {
+            } else {
                 ToastUtil.show("权限被拒绝无法正常使用功能");
                 CheckTipDialog dialog = new CheckTipDialog(getActivity());
                 dialog.setTitle("提示");
@@ -958,12 +943,12 @@ public class HomeFragment extends BaseFragment {
                     !TextUtils.isEmpty(mBjdxTip.getText().toString())) {
                 if (isShowSendTimes && TextUtils.isEmpty(mSmsFscsTip.getText().toString())) {
                     ToastUtil.show("请设置发送次数");
-                }else  {
+                } else {
                     intent = new Intent(getContext(), AutoSendSmsActivity.class);
                     intent.putExtra("type", "dhfs");
                     startActivity(intent);
                 }
-            }else  {
+            } else {
                 ToastUtil.show("请填写正确的手机号和短信内容");
             }
         } else {
@@ -1182,24 +1167,16 @@ public class HomeFragment extends BaseFragment {
 
     private void changeCallUi() {
         //拨打电话
-        if (!TextUtils.isEmpty(mCallMobileEt.getText().toString()) &&
+        mCallTv.setEnabled(!TextUtils.isEmpty(mCallMobileEt.getText().toString()) &&
                 !TextUtils.isEmpty(mCallBdcsTv.getText().toString()) &&
                 !TextUtils.isEmpty(mCallBdjgTv.getText().toString()) &&
-                !TextUtils.isEmpty(mCallBdfsTv.getText().toString())) {
-            mCallTv.setBackgroundResource(R.drawable.round_36_green);
-        } else {
-            mCallTv.setBackgroundResource(R.drawable.round_36_grey);
-        }
+                !TextUtils.isEmpty(mCallBdfsTv.getText().toString()));
     }
 
     private void changePlCallUi() {
         //批量拨打电话
-        if (!TextUtils.isEmpty(mCallHmdrTip.getText().toString()) &&
-                !TextUtils.isEmpty(mCallJgszTip.getText().toString())) {
-            mPlCallTv.setBackgroundResource(R.drawable.round_36_green);
-        } else {
-            mPlCallTv.setBackgroundResource(R.drawable.round_36_grey);
-        }
+        mPlCallTv.setEnabled(!TextUtils.isEmpty(mCallHmdrTip.getText().toString()) &&
+                !TextUtils.isEmpty(mCallJgszTip.getText().toString()));
     }
 
     private void changeSmsUi() {
@@ -1209,18 +1186,18 @@ public class HomeFragment extends BaseFragment {
             boolean b = (smsSendTimesLayout.getVisibility() == View.VISIBLE && !TextUtils.isEmpty(mSmsFscsTip.getText().toString())) || smsSendTimesLayout.getVisibility() == View.GONE;
             if (!TextUtils.isEmpty(mSmsMobileEt.getText().toString()) && b &&
                     !TextUtils.isEmpty(mBjdxTip.getText().toString())) {
-                mSmsLjfs.setBackgroundResource(R.drawable.round_36_green);
+                mSmsLjfs.setEnabled(true);
             } else {
-                mSmsLjfs.setBackgroundResource(R.drawable.round_36_grey);
+                mSmsLjfs.setEnabled(false);
             }
         } else {
             //批量发送
             if (!TextUtils.isEmpty(mSmsHmdrTip.getText().toString()) &&
                     !TextUtils.isEmpty(mSmsFsjgTip.getText().toString()) &&
                     !TextUtils.isEmpty(mBjdxTip.getText().toString())) {
-                mSmsLjfs.setBackgroundResource(R.drawable.round_36_green);
+                mSmsLjfs.setEnabled(true);
             } else {
-                mSmsLjfs.setBackgroundResource(R.drawable.round_36_grey);
+                mSmsLjfs.setEnabled(false);
             }
         }
     }

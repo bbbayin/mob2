@@ -32,10 +32,10 @@
 
 
             <LinearLayout
-                android:orientation="vertical"
                 android:id="@+id/msg_flipper"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
+                android:orientation="vertical"
                 android:visibility="gone" />
 
             <View
@@ -43,84 +43,49 @@
                 android:layout_height="10dp"
                 android:background="#E7E7E7" />
 
-            <LinearLayout
+            <RadioGroup
+                android:id="@+id/home_radio_group"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/top1_ll"
+                <RadioButton
+                    android:id="@+id/home_radio_call_phone"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/selector_radio_left_bg"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="拨打电话"
+                    android:textColor="@color/color_selector_primary_white" />
 
-                    <ImageView
-                        android:id="@+id/bddh_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@mipmap/bddh_green" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:text="拨打电话"
-                        android:textColor="@color/color_454545"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/top2_ll"
+                <RadioButton
+                    android:id="@+id/home_radio_multi_call"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/selector_radio_center_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="批量拨打"
+                    android:textColor="@color/color_selector_primary_white" />
 
-                    <ImageView
-                        android:id="@+id/plbd_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@mipmap/plbd_grey" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:text="批量拨打"
-                        android:textColor="@color/color_A6A6A6"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/top3_ll"
+                <RadioButton
+                    android:id="@+id/home_radio_send_msg"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/selector_radio_right_bg"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="短信定时"
+                    android:textColor="@color/color_selector_primary_white" />
 
-                    <ImageView
-                        android:id="@+id/dxds_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@mipmap/dxds_grey" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:text="短信定时"
-                        android:textColor="@color/color_A6A6A6"
-                        android:textSize="15sp" />
-                </LinearLayout>
-            </LinearLayout>
+            </RadioGroup>
 
             <RelativeLayout
                 android:layout_width="match_parent"

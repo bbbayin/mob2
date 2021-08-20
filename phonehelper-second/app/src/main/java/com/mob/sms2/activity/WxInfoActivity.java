@@ -55,8 +55,6 @@ public class WxInfoActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.close:
-                finish();
-                break;
             case R.id.refuse:
                 finish();
                 break;

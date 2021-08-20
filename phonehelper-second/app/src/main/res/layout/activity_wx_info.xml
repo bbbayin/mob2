@@ -3,161 +3,167 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/close"
             android:layout_width="wrap_content"
-            android:src="@mipmap/close_grey"
-            android:padding="10dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="24dp"
-            android:layout_height="wrap_content"/>
+            android:padding="10dp"
+            android:src="@mipmap/close_grey" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="55dp"
-                android:background="@mipmap/ic_launcher"
+                android:layout_height="55dp"
                 android:layout_marginLeft="30dp"
-                android:layout_height="55dp"/>
+                android:background="@mipmap/ic_launcher" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="自动拨打电话app申请使用"
-                android:textSize="15sp"
-                android:layout_marginLeft="12dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:text="自动拨打电话app申请使用"
                 android:textColor="#414141"
-                android:layout_height="wrap_content"/>
+                android:textSize="15sp" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="你的微信头像、昵称、地区和性别信息"
-            android:textSize="15sp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:text="你的微信头像、昵称、地区和性别信息"
             android:textColor="#414141"
-            android:layout_height="wrap_content"/>
+            android:textSize="15sp" />
 
         <TextView
-            android:visibility="gone"
             android:layout_width="wrap_content"
-            android:text="你可以使用不同的个人信息登录"
-            android:textSize="15sp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="48dp"
+            android:text="你可以使用不同的个人信息登录"
             android:textColor="#414141"
-            android:layout_height="wrap_content"/>
+            android:textSize="15sp"
+            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="6dp"
-            android:layout_height="1dp"/>
+            android:layout_marginTop="6dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="80dp">
+            android:layout_height="80dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/userhead"
                 android:layout_width="60dp"
-                android:layout_marginLeft="30dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
-                android:layout_height="60dp"/>
+                android:layout_marginLeft="30dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content">
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
-                    android:textSize="15sp"
+                    android:layout_height="wrap_content"
                     android:textColor="#414141"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="微信个人信息"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:textSize="14sp"
+                    android:text="微信个人信息"
                     android:textColor="#A8A8A8"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="30dp"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="30dp" />
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:orientation="horizontal"
-            android:layout_height="80dp">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/add"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@mipmap/add_icon"
-                android:layout_height="wrap_content"/>
+                android:layout_marginLeft="30dp"
+                android:background="@mipmap/add_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="新建用户信息"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#414141"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"/>
+                android:layout_marginLeft="10dp"
+                android:text="新建用户信息"
+                android:textColor="#414141"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="30dp"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="30dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal">
 
-        <ImageView
+        <TextView
             android:id="@+id/agree"
-            android:layout_width="wrap_content"
-            android:background="@mipmap/agree_bg"
-            android:layout_height="wrap_content"/>
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_btn_round_enable_bg"
+            android:gravity="center"
+            android:text="同意"
+            android:textColor="@color/white" />
 
-        <ImageView
+        <TextView
             android:id="@+id/refuse"
-            android:layout_width="wrap_content"
-            android:background="@mipmap/refuse_bg"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content"/>
+            android:text="拒绝"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/shape_btn_round_storke_enable_bg"
+            android:gravity="center" />
     </LinearLayout>
 </RelativeLayout>

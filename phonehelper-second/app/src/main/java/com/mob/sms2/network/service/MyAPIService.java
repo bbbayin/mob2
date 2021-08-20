@@ -202,9 +202,8 @@ public interface MyAPIService {
 
     //修改用户信息
     @POST("prod-api/restApi/appUser/updateUser")
-    @FormUrlEncoded
-    Observable<BaseBean> updateUser(@Field("avatar") String avatar,
-                                    @Field("nickName") String nickName);
+    Observable<BaseBean> updateUser(@Query("avatar") String avatar,
+                                    @Query("nickName") String nickName);
 
     //支付订单
     @POST("prod-api/restApi/pay/toPay")

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.mob.sms2.R;
 import com.mob.sms2.base.BaseActivity;
 import com.mob.sms2.network.RetrofitHelper;
@@ -33,7 +34,6 @@ public class PolicyActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy_activity);
-        setStatusBar(getResources().getColor(R.color.green));
         findViewById(R.id.policy_bt_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +42,7 @@ public class PolicyActivity extends BaseActivity {
         });
         tvTitle = findViewById(R.id.policy_tv_title);
         webview = findViewById(R.id.policy_webview);
-
+        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).init();
         initData();
     }
 
