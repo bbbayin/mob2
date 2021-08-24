@@ -3,6 +3,7 @@ package com.mob.sms2.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.mob.sms2.Constants;
 import com.mob.sms2.utils.ChannelUtil;
 import com.mob.sms2.utils.SPConstant;
 import com.mob.sms2.utils.SPUtils;
@@ -31,15 +32,15 @@ public class MyApplication extends Application implements Observer {
     private void initSDK() {
         Channel = ChannelUtil.getChannel(this);
         UMConfigure.setLogEnabled(true);
-        UMConfigure.init(this, "6099327553b6726499f68bb7", Channel, UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.init(this, "6124a28310c4020b03eaf9e5", Channel, UMConfigure.DEVICE_TYPE_PHONE, "");
 //        UMConfigure.init(this, "6099327553b6726499f68bb7", Channel, UMConfigure.DEVICE_TYPE_PHONE, "");
-        PlatformConfig.setWeixin("wx22e1a70e838f3267", "42e372330366d521a57ed99bcb350b5b");
-        PlatformConfig.setQQZone("101924228", "1166dd0fd38327bb8f4da43276b8865f");
-        PlatformConfig.setQQFileProvider("com.mob.sms.fileprovider");
+        PlatformConfig.setWeixin(Constants.WX_APPID, Constants.WX_APPKEY);
+        PlatformConfig.setQQZone(Constants.QQ_APPID, Constants.QQ_APPKEY);
+        PlatformConfig.setQQFileProvider("com.mob.sms2.fileprovider");
 
         wxApi = WXAPIFactory.createWXAPI(this, null);
         // 将该app注册到微信
-        wxApi.registerApp("wx22e1a70e838f3267");
+        wxApi.registerApp(Constants.WX_APPID);
     }
 
     public static Context getContext(){

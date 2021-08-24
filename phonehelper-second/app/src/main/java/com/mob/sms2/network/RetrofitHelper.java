@@ -51,7 +51,7 @@ public class RetrofitHelper {
 
     public static synchronized MyAPIService getApi() {
         if (sApi == null) {
-            final MyAPIService impl = createApi(MyAPIService.class, "http://dial.shengzewang.cn/");
+            final MyAPIService impl = createApi(MyAPIService.class, "http://dial2.shengzewang.cn/");
             Object proxy = Proxy.newProxyInstance(impl.getClass().getClassLoader(), impl.getClass().getInterfaces(),
                     (proxy1, method, args) -> {
                         Object invoke = method.invoke(impl, args);
