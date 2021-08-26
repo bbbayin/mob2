@@ -17,18 +17,18 @@
             android:orientation="vertical">
 
 
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:banner_indicator_gravity="center"
-                app:banner_indicator_height="5dp"
-                app:banner_indicator_marginBottom="10dp"
-                app:banner_indicator_normal_color="#91819C"
-                app:banner_indicator_normal_width="5dp"
-                app:banner_indicator_selected_color="#ffffff"
-                app:banner_indicator_selected_width="5dp"
-                app:banner_indicator_space="5dp" />
+<!--            <com.youth.banner.Banner-->
+<!--                android:id="@+id/banner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                app:banner_indicator_gravity="center"-->
+<!--                app:banner_indicator_height="5dp"-->
+<!--                app:banner_indicator_marginBottom="10dp"-->
+<!--                app:banner_indicator_normal_color="#91819C"-->
+<!--                app:banner_indicator_normal_width="5dp"-->
+<!--                app:banner_indicator_selected_color="#ffffff"-->
+<!--                app:banner_indicator_selected_width="5dp"-->
+<!--                app:banner_indicator_space="5dp" />-->
 
 
             <LinearLayout

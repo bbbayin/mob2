@@ -28,8 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.mob.sms2.R;
 import com.mob.sms2.activity.AutoCallPhoneActivity;
 import com.mob.sms2.activity.AutoSendSmsActivity;
@@ -45,7 +43,6 @@ import com.mob.sms2.application.MyApplication;
 import com.mob.sms2.auto.SingleAutoTaskActivity;
 import com.mob.sms2.base.BaseFragment;
 import com.mob.sms2.base.SimpleObserver;
-import com.mob.sms2.bean.BannerBean;
 import com.mob.sms2.bean.ChannelChargeBean;
 import com.mob.sms2.bean.CloudPermissionBean;
 import com.mob.sms2.bean.HomeFuncBean;
@@ -63,8 +60,6 @@ import com.mob.sms2.dialog.SetMultiCallIntervalDialog;
 import com.mob.sms2.network.RetrofitHelper;
 import com.mob.sms2.network.bean.BaseResponse;
 import com.mob.sms2.network.bean.UserInfoBean;
-import com.mob.sms2.rx.BaseObserver;
-import com.mob.sms2.rx.MobError;
 import com.mob.sms2.utils.Constants;
 import com.mob.sms2.utils.FreeCheckUtils;
 import com.mob.sms2.utils.MsgViewFactory;
@@ -72,8 +67,6 @@ import com.mob.sms2.utils.SPConstant;
 import com.mob.sms2.utils.SPUtils;
 import com.mob.sms2.utils.ToastUtil;
 import com.mob.sms2.utils.Utils;
-import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -159,8 +152,8 @@ public class HomeFragment extends BaseFragment {
     ImageView ivMultiCLearPhone;
     @BindView(R.id.sms_btn_clear_phone)
     ImageView ivClearSmsImportPhone;
-    @BindView(R.id.banner)
-    Banner banner;
+//    @BindView(R.id.banner)
+//    Banner banner;
     @BindView(R.id.home_error_layout)
     View homeErrorLayout;
     @BindView(R.id.home_tv_error_msg)
@@ -212,18 +205,18 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initData() {
-        RetrofitHelper.getApi().getImage(3)
-                .subscribe(new BaseObserver<List<BannerBean>>() {
-                    @Override
-                    protected void onSuccess(List<BannerBean> list) {
-                        initBanner(list);
-                    }
-
-                    @Override
-                    protected void onFailed(MobError error) {
-
-                    }
-                });
+//        RetrofitHelper.getApi().getImage(3)
+//                .subscribe(new BaseObserver<List<BannerBean>>() {
+//                    @Override
+//                    protected void onSuccess(List<BannerBean> list) {
+//                        initBanner(list);
+//                    }
+//
+//                    @Override
+//                    protected void onFailed(MobError error) {
+//
+//                    }
+//                });
         RetrofitHelper.getApi().getUserInfo().subscribe(new SimpleObserver<UserInfoBean>() {
             @Override
             public void onNext(UserInfoBean userInfoBean) {
@@ -372,44 +365,44 @@ public class HomeFragment extends BaseFragment {
         bddh_ll.setVisibility(View.GONE);
     }
 
-    private void initBanner(List<BannerBean> list) {
-        if (list != null && !list.isEmpty()) {
-            banner.setVisibility(View.VISIBLE);
-            banner.setAdapter(new BannerAdapter<BannerBean, BannerHolder>(list) {
-                @Override
-                public BannerHolder onCreateHolder(ViewGroup parent, int viewType) {
-                    LayoutInflater from = LayoutInflater.from(parent.getContext());
-                    View item = from.inflate(R.layout.banner_image_layout, parent, false);
-                    return new BannerHolder(item);
-                }
-
-                @Override
-                public void onBindView(BannerHolder holder, BannerBean data, int position, int size) {
-                    Glide.with(holder.itemView.getContext())
-                            .load(data.img)
-                            .apply(RequestOptions.fitCenterTransform()
-                                    .error(R.drawable.ic_launcher_background)
-                                    .placeholder(R.drawable.ic_prompt_loading))
-                            .into(holder.image);
-                    if (!TextUtils.isEmpty(data.url)) {
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(Intent.ACTION_VIEW);
-                                intent.setData(Uri.parse(data.url));
-                                startActivity(intent);
-                            }
-                        });
-
-                    }
-                }
-            });
-            banner.setDatas(list);
-            banner.start();
-        } else {
-            banner.setVisibility(View.GONE);
-        }
-    }
+//    private void initBanner(List<BannerBean> list) {
+//        if (list != null && !list.isEmpty()) {
+//            banner.setVisibility(View.VISIBLE);
+//            banner.setAdapter(new BannerAdapter<BannerBean, BannerHolder>(list) {
+//                @Override
+//                public BannerHolder onCreateHolder(ViewGroup parent, int viewType) {
+//                    LayoutInflater from = LayoutInflater.from(parent.getContext());
+//                    View item = from.inflate(R.layout.banner_image_layout, parent, false);
+//                    return new BannerHolder(item);
+//                }
+//
+//                @Override
+//                public void onBindView(BannerHolder holder, BannerBean data, int position, int size) {
+//                    Glide.with(holder.itemView.getContext())
+//                            .load(data.img)
+//                            .apply(RequestOptions.fitCenterTransform()
+//                                    .error(R.drawable.ic_launcher_background)
+//                                    .placeholder(R.drawable.ic_prompt_loading))
+//                            .into(holder.image);
+//                    if (!TextUtils.isEmpty(data.url)) {
+//                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                                intent.setData(Uri.parse(data.url));
+//                                startActivity(intent);
+//                            }
+//                        });
+//
+//                    }
+//                }
+//            });
+//            banner.setDatas(list);
+//            banner.start();
+//        } else {
+//            banner.setVisibility(View.GONE);
+//        }
+//    }
 
     private static class BannerHolder extends RecyclerView.ViewHolder {
 
