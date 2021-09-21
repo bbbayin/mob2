@@ -31,6 +31,7 @@ public class MyApplication extends Application implements Observer {
 
     private void initSDK() {
         Channel = ChannelUtil.getChannel(this);
+        System.out.println("渠道-"+Channel);
         UMConfigure.setLogEnabled(true);
         UMConfigure.init(this, "6124a28310c4020b03eaf9e5", Channel, UMConfigure.DEVICE_TYPE_PHONE, "");
 //        UMConfigure.init(this, "6099327553b6726499f68bb7", Channel, UMConfigure.DEVICE_TYPE_PHONE, "");

@@ -19,6 +19,7 @@ import com.mob.sms2.R;
 import com.mob.sms2.adapter.SplashBannerAdapter;
 import com.mob.sms2.base.SimpleObserver;
 import com.mob.sms2.bean.BannerBean;
+import com.mob.sms2.dialog.UserAgreementDialog;
 import com.mob.sms2.network.RetrofitHelper;
 import com.mob.sms2.network.bean.BaseResponse;
 import com.mob.sms2.utils.SPConstant;
@@ -51,10 +52,26 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
-
         initView();
-
         initGlobalData();
+        showPolicyDialog();
+    }
+
+    private void showPolicyDialog() {
+        UserAgreementDialog userAgreementDialog = new UserAgreementDialog(this);
+        userAgreementDialog.show();
+        userAgreementDialog.setOnClickListener(new UserAgreementDialog.OnClickListener() {
+            @Override
+            public void agree() {
+                userAgreementDialog.dismiss();
+                SPUtils.put(SPConstant.SP_USER_PERMISSION_OK, true);
+            }
+
+            @Override
+            public void refuse() {
+                userAgreementDialog.dismiss();
+            }
+        });
     }
 
     private void initGlobalData() {

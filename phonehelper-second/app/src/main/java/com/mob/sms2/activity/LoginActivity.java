@@ -97,6 +97,38 @@ public class LoginActivity extends BaseActivity {
         umShareAPI = UMShareAPI.get(this);
         ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).init();
     }
+    private void showPolicyDialog() {
+        UserAgreementDialog userAgreementDialog = new UserAgreementDialog(this);
+        userAgreementDialog.show();
+        userAgreementDialog.setOnClickListener(new UserAgreementDialog.OnClickListener() {
+            @Override
+            public void agree() {
+
+                userAgreementDialog.dismiss();
+
+                if (mTxMobile && mTxPwd && mSelectAgreement) {
+                    mCanLogin = true;
+                } else {
+                    mCanLogin = false;
+                }
+                mBtnLogin.setEnabled(mCanLogin);
+                SPUtils.put(SPConstant.SP_USER_PERMISSION_OK, true);
+                sdkManager.init();
+            }
+
+            @Override
+            public void refuse() {
+                userAgreementDialog.dismiss();
+
+                if (mTxMobile && mTxPwd && mSelectAgreement) {
+                    mCanLogin = true;
+                } else {
+                    mCanLogin = false;
+                }
+                mBtnLogin.setEnabled(mCanLogin);
+            }
+        });
+    }
 
     private void initPolicy() {
         String content = "我已阅读并同意《用户协议》和《隐私政策》";
@@ -337,39 +369,6 @@ public class LoginActivity extends BaseActivity {
             mCanLogin = false;
         }
         mBtnLogin.setEnabled(mCanLogin);
-    }
-
-    private void showPolicyDialog() {
-        UserAgreementDialog userAgreementDialog = new UserAgreementDialog(this);
-        userAgreementDialog.show();
-        userAgreementDialog.setOnClickListener(new UserAgreementDialog.OnClickListener() {
-            @Override
-            public void agree() {
-
-                userAgreementDialog.dismiss();
-
-                if (mTxMobile && mTxPwd && mSelectAgreement) {
-                    mCanLogin = true;
-                } else {
-                    mCanLogin = false;
-                }
-                mBtnLogin.setEnabled(mCanLogin);
-                SPUtils.put(SPConstant.SP_USER_PERMISSION_OK, true);
-                sdkManager.init();
-            }
-
-            @Override
-            public void refuse() {
-                userAgreementDialog.dismiss();
-
-                if (mTxMobile && mTxPwd && mSelectAgreement) {
-                    mCanLogin = true;
-                } else {
-                    mCanLogin = false;
-                }
-                mBtnLogin.setEnabled(mCanLogin);
-            }
-        });
     }
 
     private void authLogin(String avatar, String loginType, String nickName, String openid, String originate) {
