@@ -52,8 +52,6 @@ public class ReCallPhoneActivity extends BaseActivity {
     TextView mSuccessNumTv;
     @BindView(R.id.fail_num)
     TextView mFailNumTv;
-    @BindView(R.id.pause)
-    ImageView mPause;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
     @BindView(R.id.record_ll)

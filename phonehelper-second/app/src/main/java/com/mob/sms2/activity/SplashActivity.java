@@ -46,6 +46,8 @@ public class SplashActivity extends Activity {
     @BindView(R.id.logo_text)
     View logoText;
 
+    private final int MSG_SKIP = 0;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +56,6 @@ public class SplashActivity extends Activity {
         ButterKnife.bind(this);
         initView();
         initGlobalData();
-        showPolicyDialog();
     }
 
     private void showPolicyDialog() {
@@ -65,11 +66,14 @@ public class SplashActivity extends Activity {
             public void agree() {
                 userAgreementDialog.dismiss();
                 SPUtils.put(SPConstant.SP_USER_PERMISSION_OK, true);
+                mHandler.sendEmptyMessageDelayed(MSG_SKIP, 500);
             }
 
             @Override
             public void refuse() {
                 userAgreementDialog.dismiss();
+                finish();
+                System.exit(0);
             }
         });
     }
@@ -89,10 +93,10 @@ public class SplashActivity extends Activity {
         if (!SPUtils.getBoolean(SPConstant.SP_USER_PERMISSION_OK, false)) {
             mSkip.setOnClickListener(view -> {
                 SPUtils.put(SPConstant.SP_SPLASH_WELCOME, true);
-                mHandler.sendEmptyMessageDelayed(0, 500);
+                mHandler.sendEmptyMessageDelayed(MSG_SKIP, 500);
             });
             logoText.setVisibility(View.VISIBLE);
-            mHandler.sendEmptyMessageDelayed(0, 3000);
+            showPolicyDialog();
             return;
         }else {
             logoText.setVisibility(View.GONE);
@@ -113,7 +117,7 @@ public class SplashActivity extends Activity {
             mWelcomeRl.setVisibility(View.VISIBLE);
             mBanner.setVisibility(View.GONE);
             mSkip.setVisibility(View.GONE);
-            mHandler.sendEmptyMessageDelayed(0, 3000);
+            mHandler.sendEmptyMessageDelayed(MSG_SKIP, 3000);
         } else {
             RetrofitHelper.getApi().getImage(2)
                     .subscribe(new SimpleObserver<BaseResponse<List<BannerBean>>>() {
@@ -127,7 +131,7 @@ public class SplashActivity extends Activity {
                     });
             mSkip.setOnClickListener(view -> {
                 SPUtils.put(SPConstant.SP_SPLASH_WELCOME, true);
-                mHandler.sendEmptyMessageDelayed(0, 500);
+                mHandler.sendEmptyMessageDelayed(MSG_SKIP, 500);
             });
         }
     }
@@ -149,7 +153,7 @@ public class SplashActivity extends Activity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 0:
+                case MSG_SKIP:
                     if (TextUtils.isEmpty(SPUtils.getString(SPConstant.SP_USER_TOKEN, ""))) {
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     } else {

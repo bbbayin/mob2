@@ -73,6 +73,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
@@ -87,7 +93,7 @@ dependencies {
     
     implementation files('libs/MagicIndicator-1.5.0.aar')
     implementation files("libs/keepalive-release.aar")
-    implementation files("libs/alipaysdk.aar")
+    implementation (name: 'alipaySdk', ext: 'aar')
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -95,11 +101,7 @@ dependencies {
 
     // butterknife∏
     implementation 'com.jakewharton:butterknife:10.0.0'
-    implementation files('libs/umeng-share-core-7.1.3.jar')
-    implementation files('libs/umeng-share-QQ-full-7.1.3.jar')
-    implementation files('libs/umeng-share-wechat-full-7.1.3.jar')
-    implementation files('libs/umeng-shareboard-widget-7.1.3.jar')
-    implementation files('libs/umeng-sharetool-7.1.3.jar')
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     def poiversion = '3.17'
     implementation(group: 'org.apache.poi', name: 'poi', version: poiversion) {
@@ -155,9 +157,17 @@ dependencies {
     implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata', version: '2.0.0'
 
     // umeng
-    implementation  'com.umeng.umsdk:common:9.3.8'// 必选
-    implementation  'com.umeng.umsdk:asms:1.2.2'// 必选
-
+    api files('libs/umeng-common-9.4.4.jar')
+    api files('libs/umeng-share-core-7.1.6.jar')
+    api files('libs/umeng-shareboard-widget-7.1.6.jar')
+    api files('libs/umeng-sharetool-7.1.6.jar')
+    api files('libs/utdid4all-1.5.2.1-proguard.jar')
+    api files('libs/wechat-sdk-android-without-mta-5.4.3.jar')
+    api(name: 'umeng-apm-v1.4.2', ext: 'aar')
+    api(name: 'umeng-asms-v1.4.1', ext: 'aar')
+    api files('libs/umeng-share-QQ-full-7.1.6.jar')
+    api files('libs/umeng-share-wechat-full-7.1.6.jar')
+    api files('libs/umeng-shareboard-widget-7.1.6.jar')
 }
 
 repositories {

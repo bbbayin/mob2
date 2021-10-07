@@ -37,7 +37,7 @@
         <ImageView
             android:id="@+id/logo"
             android:layout_width="60dp"
-            android:background="@mipmap/ic_launcher"
+            android:background="@mipmap/phone_ic_launcher"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:layout_height="60dp"/>
