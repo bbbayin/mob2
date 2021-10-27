@@ -27,6 +27,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.mob.sms2.R;
+import com.mob.sms2.ShareManager;
 import com.mob.sms2.activity.AboutUsActivity;
 import com.mob.sms2.activity.EnterpriseActivity;
 import com.mob.sms2.activity.FeedBackActivity;
@@ -314,36 +315,10 @@ public class MineFragment extends BaseFragment {
                 //APP ID：101924228
                 //APP Key：1166dd0fd38327bb8f4da43276b8865f
                 //审核通过
-                Tencent instance = Tencent.createInstance("101924228", mActivity);
-                final Bundle params = new Bundle();
-                params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
-                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, mShareInfo.title);//必填
-                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, mShareInfo.content);//选填
-                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, mShareInfo.url);//必填
-                ArrayList<String> images = new ArrayList<>();
-                images.add(mShareInfo.logo);
-                params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, images);
-                instance.shareToQzone(mActivity, params, new IUiListener() {
-                    @Override
-                    public void onComplete(Object o) {
-
-                    }
-
-                    @Override
-                    public void onError(UiError uiError) {
-
-                    }
-
-                    @Override
-                    public void onCancel() {
-
-                    }
-
-                    @Override
-                    public void onWarning(int i) {
-
-                    }
-                });
+                if (!mShareInfo.url.startsWith("http")) {
+                    mShareInfo.url = "http://"+mShareInfo.url;
+                }
+                ShareManager.getInstance().shareToQQZero(getActivity(), mShareInfo.title, mShareInfo.logo, mShareInfo.content, mShareInfo.url);
             }
 
             @Override
@@ -383,37 +358,10 @@ public class MineFragment extends BaseFragment {
 
             @Override
             public void qqChat() {
-                if (mShareInfo != null) {
-                    Tencent instance = Tencent.createInstance("101924228", mActivity);
-                    final Bundle params = new Bundle();
-                    params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-                    params.putString(QzoneShare.SHARE_TO_QQ_TITLE, mShareInfo.title);//必填
-                    params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, mShareInfo.content);//选填
-                    params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, mShareInfo.url);//必填
-                    ArrayList<String> images = new ArrayList<>();
-                    images.add(mShareInfo.logo);
-                    params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, images);
-                    instance.shareToQQ(mActivity, params, new IUiListener() {
-                        @Override
-                        public void onComplete(Object o) {
-
-                        }
-
-                        @Override
-                        public void onError(UiError uiError) {
-
-                        }
-
-                        @Override
-                        public void onCancel() {
-
-                        }
-
-                        @Override
-                        public void onWarning(int i) {
-
-                        }
-                    });
+                if (mShareInfo != null) {if (!mShareInfo.url.startsWith("http")) {
+                    mShareInfo.url = "http://"+mShareInfo.url;
+                }
+                    ShareManager.getInstance().shareToQQ(getActivity(), mShareInfo.title, mShareInfo.logo, mShareInfo.content, mShareInfo.url);
                 }
             }
         });

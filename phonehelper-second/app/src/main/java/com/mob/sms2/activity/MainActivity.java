@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mob.sms2.R;
+import com.mob.sms2.ShareManager;
 import com.mob.sms2.adapter.ViewPagerAdapter;
 import com.mob.sms2.base.BaseActivity;
 import com.mob.sms2.base.SimpleObserver;
@@ -256,5 +257,12 @@ public class MainActivity extends BaseActivity {
                 dialog.show();
             }
         }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ShareManager.getInstance().onActivityResult(this, requestCode,resultCode,data);
     }
 }

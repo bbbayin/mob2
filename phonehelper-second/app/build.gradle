@@ -101,6 +101,9 @@ dependencies {
 
     // butterknife∏
     implementation 'com.jakewharton:butterknife:10.0.0'
+    implementation files('libs/mid-sdk-2.10.jar')
+    implementation files('libs/mta-sdk-2.0.0.jar')
+    implementation files('libs/open_sdk_3.5.4.11_r3f56456_lite.jar')
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     def poiversion = '3.17'

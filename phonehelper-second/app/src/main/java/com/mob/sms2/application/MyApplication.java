@@ -26,6 +26,9 @@ public class MyApplication extends Application implements Observer {
         mApplication = this;
         Channel = ChannelUtil.getChannel(this);
         System.out.println("渠道-"+Channel);
+        //APP ID：101924228
+        //APP Key：1166dd0fd38327bb8f4da43276b8865f
+        PlatformConfig.setQQZone("101924228", "1166dd0fd38327bb8f4da43276b8865f");
         if (SPUtils.getBoolean(SPConstant.SP_USER_PERMISSION_OK, false)) {
             initSDK();
         }else {
