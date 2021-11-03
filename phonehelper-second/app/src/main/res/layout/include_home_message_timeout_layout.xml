@@ -15,11 +15,13 @@
         <ImageView
             android:id="@+id/sms_iv"
             style="@style/HomeLeftIcon"
-            android:background="@mipmap/sms_icon" />
+            android:background="@mipmap/sms_icon2" />
 
         <TextView
             style="@style/HomeItemText"
-            android:text="单号发送" />
+            android:text="单号发送"
+            android:textColor="@color/white"
+            />
 
         <ImageView
             android:id="@+id/dhfs_switch"
@@ -62,6 +64,7 @@
             <TextView
                 style="@style/HomeItemText"
                 android:layout_marginStart="4dp"
+                android:textColor="@color/white"
                 android:text="请输入号码:" />
 
             <EditText
@@ -74,8 +77,8 @@
                 android:hint="请输入手机号码"
                 android:inputType="number"
                 android:paddingStart="10dp"
-                android:textColor="@color/color_454545"
-                android:textColorHint="@color/color_A6A6A6"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="17sp" />
 
             <ImageView
@@ -106,6 +109,7 @@
             <TextView
                 style="@style/HomeItemText"
                 android:layout_marginStart="4dp"
+                android:textColor="@color/white"
                 android:text="定时发送" />
 
             <TextView
@@ -113,6 +117,7 @@
                 style="@style/HomeItemHintText"
                 android:layout_width="0dp"
                 android:gravity="end"
+                android:textColor="@color/white"
                 android:layout_weight="1" />
 
 <!--            <ImageView-->
@@ -149,12 +154,14 @@
             <TextView
                 style="@style/HomeItemText"
                 android:layout_marginStart="4dp"
+                android:textColor="@color/white"
                 android:text="发送次数" />
 
             <TextView
                 android:id="@+id/sms_fscs_tip"
                 style="@style/HomeItemHintText"
                 android:gravity="end"
+                android:textColor="@color/white"
                 android:layout_weight="1" />
 
             <ImageView
@@ -187,7 +194,9 @@
 
         <TextView
             style="@style/HomeItemText"
-            android:text="批量发送" />
+            android:text="批量发送"
+            android:textColor="@color/white"
+            />
 
         <ImageView
             android:id="@+id/plfs_switch"
@@ -225,13 +234,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="号码导入:"
-                android:textColor="@color/color_454545"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/sms_hmdr_tip"
                 style="@style/HomeItemHintText"
                 android:paddingStart="10dp"
+                android:textColor="@color/white"
                 android:layout_weight="1" />
 
             <ImageView
@@ -262,12 +272,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="50dp"
                 android:text="双卡设置"
-                android:textColor="@color/color_454545"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/sms_sksz_tip"
                 style="@style/HomeItemHintText"
+                android:textColor="@color/white"
                 android:layout_toLeftOf="@+id/sms_sksz_arrow" />
 
             <ImageView
@@ -297,12 +308,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="50dp"
                 android:text="发送间隔"
-                android:textColor="@color/color_454545"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/sms_fsjg_tip"
                 style="@style/HomeItemHintText"
+                android:textColor="@color/white"
                 android:layout_toLeftOf="@+id/sms_fsjg_arrow" />
 
             <ImageView
@@ -334,11 +346,13 @@
 
         <TextView
             style="@style/HomeItemText"
+            android:textColor="@color/white"
             android:text="编辑短信" />
 
         <TextView
             android:id="@+id/bjdx_tip"
             style="@style/HomeItemHintText"
+            android:textColor="@color/white"
             android:layout_toLeftOf="@+id/bjdx_arrow" />
 
         <ImageView

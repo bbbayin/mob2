@@ -41,7 +41,7 @@
                 android:textSize="15sp"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
-                android:textColor="@color/color_33c197"
+                android:textColor="@color/colorPrimary"
                 android:text="确定"
                 android:layout_height="match_parent"/>
         </RelativeLayout>
@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/tv_max_call_times"
             android:layout_width="wrap_content"
-            android:textColor="@color/color_33c197"
+            android:textColor="@color/colorPrimary"
             android:layout_gravity="center_horizontal"
             android:text="最多拨打100次"
             android:layout_marginTop="6dp"

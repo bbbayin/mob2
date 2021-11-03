@@ -3,7 +3,8 @@
     android:id="@+id/bddh_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +17,14 @@
         <ImageView
             android:id="@+id/mobile_iv"
             style="@style/HomeLeftIcon"
-            android:background="@mipmap/mobile_icon" />
+            android:background="@mipmap/mobile_icon2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="9dp"
             android:text="请输入号码:"
-            android:textColor="@color/color_454545"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <EditText
@@ -35,8 +36,8 @@
             android:hint="请输入手机号码"
             android:inputType="number"
             android:paddingStart="8dp"
-            android:textColor="@color/color_454545"
-            android:textColorHint="@color/color_A6A6A6"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="17sp" />
 
         <ImageView
@@ -78,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:text="定时拨号"
-            android:textColor="@color/color_454545"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <TextView
@@ -87,7 +88,7 @@
             android:paddingStart="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/color_A6A6A6"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <ImageView
@@ -129,7 +130,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@+id/bdcs_iv"
             android:text="拨打次数"
-            android:textColor="@color/color_454545"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <TextView
@@ -139,7 +140,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="23dp"
             android:layout_toLeftOf="@+id/bdcs_arrow"
-            android:textColor="@color/color_A6A6A6"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <ImageView
@@ -175,7 +176,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@+id/bdjg_iv"
             android:text="拨打间隔"
-            android:textColor="@color/color_454545"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <TextView
@@ -185,7 +186,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="23dp"
             android:layout_toLeftOf="@+id/bdjg_arrow"
-            android:textColor="@color/color_A6A6A6"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <ImageView
@@ -221,7 +222,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@+id/bdfs_iv"
             android:text="拨打方式"
-            android:textColor="@color/color_454545"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <TextView
@@ -231,7 +232,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="23dp"
             android:layout_toLeftOf="@+id/bdfs_arrow"
-            android:textColor="@color/color_A6A6A6"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <ImageView
@@ -268,7 +269,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@+id/gd_iv"
             android:text="拨打30秒后自动挂断"
-            android:textColor="@color/color_454545"
+            android:textColor="@color/white"
             android:textSize="17sp" />
 
         <ImageView

@@ -20,7 +20,7 @@
         android:layout_margin="16dp"
         />
 
-    <com.mob.sms2.contacts.SideBar
+    <com.mob.sms3.contacts.SideBar
         android:id="@+id/fragment_contacts_sidebar"
         android:layout_gravity="end|center_vertical"
         android:layout_width="25dp"

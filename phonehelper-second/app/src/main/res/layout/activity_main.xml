@@ -12,15 +12,15 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="55dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/magicIndicator"
-        android:background="#e0e0e0"/>
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_above="@+id/magicIndicator"-->
+<!--        android:background="#e0e0e0"/>-->
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magicIndicator"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

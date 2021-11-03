@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:layout_below="@+id/logo"
-            android:textColor="@color/color_33c197"
+            android:textColor="@color/colorPrimary"
             android:text="隐藏拨号"
             android:visibility="gone"
             android:textStyle="bold"

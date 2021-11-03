@@ -65,7 +65,7 @@
                 android:textSize="15sp"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
-                android:textColor="@color/color_33c197"
+                android:textColor="@color/colorPrimary"
                 android:text="确定"
                 android:layout_height="match_parent"/>
         </RelativeLayout>

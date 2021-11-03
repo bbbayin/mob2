@@ -10,13 +10,14 @@
         android:id="@+id/register_title"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:background="@color/colorPrimary"
-        android:gravity="bottom"
+        android:background="@mipmap/login_reg_bg"
+        android:gravity="top|center_horizontal"
         android:paddingStart="20dp"
+        android:paddingTop="4dp"
         android:paddingBottom="64dp"
         android:text="注册"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -24,7 +25,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/register_title"
         android:layout_marginTop="-30dp"
-        android:background="@drawable/shape_login_content_bg"
+
         android:orientation="vertical">
 
         <LinearLayout

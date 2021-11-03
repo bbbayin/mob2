@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:text="同意"
                     android:textSize="19sp"
-                    android:textColor="#1577FF"
+                    android:textColor="#3D4E6E"
                     android:gravity="center"
                     android:layout_height="match_parent"/>
             </LinearLayout>

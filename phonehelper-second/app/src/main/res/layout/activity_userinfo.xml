@@ -88,11 +88,11 @@
         <ImageView
             android:id="@+id/edit_iv"
             android:layout_width="wrap_content"
-            android:src="@mipmap/edit_icon"
-            android:scaleType="centerInside"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:layout_height="wrap_content"/>
+            android:scaleType="centerInside"
+            android:src="@mipmap/edit_icon" />
     </RelativeLayout>
 
     <View

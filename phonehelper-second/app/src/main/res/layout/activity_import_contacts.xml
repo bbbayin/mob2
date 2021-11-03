@@ -97,7 +97,7 @@
             android:textSize="15sp" />
     </LinearLayout>
 
-    <com.mob.sms2.contacts.SideBar
+    <com.mob.sms3.contacts.SideBar
         android:id="@+id/sidebar"
         android:layout_width="25dp"
         android:layout_height="375dp"
