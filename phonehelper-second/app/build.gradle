@@ -27,18 +27,18 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file("mob2.jks")   //你的发布用keystore
-            storePassword "mob123456" //你的store密码
-            keyAlias "mob2"  //别名
-            keyPassword "mob123456"  //别名密码
+            storeFile file("mob3.jks")   //你的发布用keystore
+            storePassword "123456" //你的store密码
+            keyAlias "mob3"  //别名
+            keyPassword "123456"  //别名密码
 
             //百度云Access Key fe205c344a4d4a2cae7fb8bb10dec20d    Secret Key 1af0a6a68be34c5985b456123721a4b1
         }
         release {
-            storeFile file("mob2.jks")   //你的发布用keystore
-            storePassword "mob123456" //你的store密码
-            keyAlias "mob2"  //别名
-            keyPassword "mob123456"  //别名密码
+            storeFile file("mob3.jks")   //你的发布用keystore
+            storePassword "123456" //你的store密码
+            keyAlias "mob3"  //别名
+            keyPassword "123456"  //别名密码
 
             //百度云Access Key fe205c344a4d4a2cae7fb8bb10dec20d    Secret Key 1af0a6a68be34c5985b456123721a4b1
         }
@@ -46,6 +46,7 @@ android {
 
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
