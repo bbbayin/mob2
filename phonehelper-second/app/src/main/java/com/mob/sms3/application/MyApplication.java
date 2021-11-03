@@ -28,18 +28,17 @@ public class MyApplication extends Application implements Observer {
         System.out.println("渠道-"+Channel);
         //APP ID：101924228
         //APP Key：1166dd0fd38327bb8f4da43276b8865f
-        PlatformConfig.setQQZone("101924228", "1166dd0fd38327bb8f4da43276b8865f");
+//        PlatformConfig.setQQZone("101924228", "1166dd0fd38327bb8f4da43276b8865f");
         if (SPUtils.getBoolean(SPConstant.SP_USER_PERMISSION_OK, false)) {
             initSDK();
         }else {
-            UMConfigure.preInit(this, "6124a28310c4020b03eaf9e5", Channel);
+            UMConfigure.preInit(this, Constants.UM_APPID, Channel);
         }
     }
 
     private void initSDK() {
         UMConfigure.setLogEnabled(true);
-        UMConfigure.init(this, "6124a28310c4020b03eaf9e5", Channel, UMConfigure.DEVICE_TYPE_PHONE, "");
-//        UMConfigure.init(this, "6099327553b6726499f68bb7", Channel, UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.init(this, Constants.UM_APPID, Channel, UMConfigure.DEVICE_TYPE_PHONE, "");
         PlatformConfig.setWeixin(Constants.WX_APPID, Constants.WX_APPKEY);
         PlatformConfig.setQQZone(Constants.QQ_APPID, Constants.QQ_APPKEY);
         PlatformConfig.setQQFileProvider("com.mob.sms3.fileprovider");

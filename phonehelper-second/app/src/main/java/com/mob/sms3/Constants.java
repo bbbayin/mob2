@@ -7,5 +7,5 @@ public class Constants {
     public final static String QQ_APPID = "101952724";
     public final static String QQ_APPKEY = "a8cdd6efb5a0dd9483cb568071edbbed";
 
-    public final static String UM_APPID = "";
+    public final static String UM_APPID = "6182981be0f9bb492b4b8294";
 }
