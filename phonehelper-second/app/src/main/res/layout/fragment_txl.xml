@@ -24,7 +24,7 @@
     <!--            android:text="A" />-->
     <!--    </LinearLayout>-->
 
-    <com.mob.sms3.contacts.SideBar
+    <com.mob.sms.skin3.contacts.SideBar
         android:id="@+id/sidebar"
         android:layout_width="25dp"
         android:layout_height="match_parent"

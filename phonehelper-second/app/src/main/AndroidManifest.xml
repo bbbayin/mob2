@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.mob.sms3">
+    package="com.mob.sms.skin3">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -24,14 +24,14 @@
     <application
         android:extractNativeLibs="true"
         android:requestLegacyExternalStorage="true"
-        android:name="com.mob.sms3.application.MyApplication"
+        android:name="com.mob.sms.skin3.application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/phone_ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme.NoTranslucentStatus">
-        <activity android:name="com.mob.sms3.activity.SplashActivity"
+        <activity android:name="com.mob.sms.skin3.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WelcomeStyle">
             <intent-filter>
@@ -40,81 +40,81 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mob.sms3.activity.MainActivity"
+        <activity android:name="com.mob.sms.skin3.activity.MainActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.LoginActivity"
+        <activity android:name="com.mob.sms.skin3.activity.LoginActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.RegisterActivity"
+        <activity android:name="com.mob.sms.skin3.activity.RegisterActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.ForgetPwdActivity"
+        <activity android:name="com.mob.sms.skin3.activity.ForgetPwdActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.BindMobileActivity"
+        <activity android:name="com.mob.sms.skin3.activity.BindMobileActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.WxInfoActivity"
+        <activity android:name="com.mob.sms.skin3.activity.WxInfoActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.AboutUsActivity"
+        <activity android:name="com.mob.sms.skin3.activity.AboutUsActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.ContactsActivity"
+        <activity android:name="com.mob.sms.skin3.activity.ContactsActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.AgreementActivity"
+        <activity android:name="com.mob.sms.skin3.activity.AgreementActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.QuestionActivity"
+        <activity android:name="com.mob.sms.skin3.activity.QuestionActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.QuestionDetailActivity"
+        <activity android:name="com.mob.sms.skin3.activity.QuestionDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.EnterpriseActivity"
+        <activity android:name="com.mob.sms.skin3.activity.EnterpriseActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.CallTypeActivity"
+        <activity android:name="com.mob.sms.skin3.activity.CallTypeActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.FeedBackActivity"
+        <activity android:name="com.mob.sms.skin3.activity.FeedBackActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.FeedBackHistoryActivity"
+        <activity android:name="com.mob.sms.skin3.activity.FeedBackHistoryActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.FeedBackDetailActivity"
+        <activity android:name="com.mob.sms.skin3.activity.FeedBackDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.ShareQrcodeActivity"
+        <activity android:name="com.mob.sms.skin3.activity.ShareQrcodeActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.DocImportActivity"
+        <activity android:name="com.mob.sms.skin3.activity.DocImportActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.DocSelectActivity"
+        <activity android:name="com.mob.sms.skin3.activity.DocSelectActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.ImportContactsActivity"
+        <activity android:name="com.mob.sms.skin3.activity.ImportContactsActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.CopyImportActivity"
+        <activity android:name="com.mob.sms.skin3.activity.CopyImportActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.PhoneInfoActivity"
+        <activity android:name="com.mob.sms.skin3.activity.PhoneInfoActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.SettingActivity"
+        <activity android:name="com.mob.sms.skin3.activity.SettingActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.VipActivity"
+        <activity android:name="com.mob.sms.skin3.activity.VipActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.SimSettingActivity"
+        <activity android:name="com.mob.sms.skin3.activity.SimSettingActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.EditSmsActivity"
+        <activity android:name="com.mob.sms.skin3.activity.EditSmsActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.AutoSendSmsActivity"
+        <activity android:name="com.mob.sms.skin3.activity.AutoSendSmsActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.AddContactActivity"
+        <activity android:name="com.mob.sms.skin3.activity.AddContactActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.AutoCallPhoneActivity"
+        <activity android:name="com.mob.sms.skin3.activity.AutoCallPhoneActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.UserInfoActivity"
+        <activity android:name="com.mob.sms.skin3.activity.UserInfoActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.ReCallPhoneActivity"
+        <activity android:name="com.mob.sms.skin3.activity.ReCallPhoneActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.ReSendSmsActivity"
+        <activity android:name="com.mob.sms.skin3.activity.ReSendSmsActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.activity.OrderHistoryActivity"
+        <activity android:name="com.mob.sms.skin3.activity.OrderHistoryActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.mob.sms3.wxapi.WXEntryActivity"
+            android:name="com.mob.sms.skin3.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <activity android:name="com.mob.sms3.activity.CallActivity"
+        <activity android:name="com.mob.sms.skin3.activity.CallActivity"
             android:screenOrientation="portrait">
             <!-- provides ongoing call UI -->
             <intent-filter>
@@ -128,7 +128,7 @@
         </activity>
 
         <service
-            android:name="com.mob.sms3.service.CallService"
+            android:name="com.mob.sms.skin3.service.CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">
             <meta-data
                 android:name="android.telecom.IN_CALL_SERVICE_UI"
@@ -148,7 +148,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.mob.sms3.fileprovider"
+            android:authorities="com.mob.sms.skin3.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -171,17 +171,17 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
-        <activity android:name="com.mob.sms3.policy.PolicyActivity"
+        <activity android:name="com.mob.sms.skin3.policy.PolicyActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.mob.sms3.debug.DebugActivity" />
-        <activity android:name="com.mob.sms3.auto.SingleAutoTaskActivity"
+        <activity android:name="com.mob.sms.skin3.debug.DebugActivity" />
+        <activity android:name="com.mob.sms.skin3.auto.SingleAutoTaskActivity"
             android:launchMode="singleTask"/>
-        <activity android:name="com.mob.sms3.activity.SetSecretInfoActivity" />
-        <activity android:name="com.mob.sms3.activity.ImageViewerActivity" />
-        <activity android:name="com.mob.sms3.activity.RecordListActivity" />
+        <activity android:name="com.mob.sms.skin3.activity.SetSecretInfoActivity" />
+        <activity android:name="com.mob.sms.skin3.activity.ImageViewerActivity" />
+        <activity android:name="com.mob.sms.skin3.activity.RecordListActivity" />
 
         <provider
-            android:authorities="com.mob.sms3.fileprovider2"
+            android:authorities="com.mob.sms.skin3.fileprovider2"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -192,7 +192,7 @@
 
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
-        <service android:name="com.mob.sms3.service.UpdateService"/>
+        <service android:name="com.mob.sms.skin3.service.UpdateService"/>
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
