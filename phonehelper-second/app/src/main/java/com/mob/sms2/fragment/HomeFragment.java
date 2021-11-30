@@ -883,8 +883,7 @@ public class HomeFragment extends BaseFragment {
         @SuppressLint("MissingPermission")
         List<SubscriptionInfo> list = sManager.getActiveSubscriptionInfoList();
         if (list == null || list.isEmpty()) {
-            ToastUtil.showLong("请允许获取手机设备信息权限，才能使用次功能");
-            Utils.jumpToPermissionsEditorActivity(getActivity());
+            ToastUtil.showLong("未检测到您的sim卡，无法使用此功能");
             return;
         }
         FreeCheckUtils.check(getActivity(), false, new FreeCheckUtils.OnCheckCallback() {

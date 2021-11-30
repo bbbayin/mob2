@@ -69,7 +69,7 @@ public class AutoCallPhoneActivity extends BaseActivity {
     @BindView(R.id.fail_num)
     TextView mFailNumTv;
     @BindView(R.id.pause)
-    ImageView mPause;
+    TextView mPause;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
     @BindView(R.id.record_ll)
