@@ -379,7 +379,7 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
         keys.get(10).type = DialKeyBean.TYPE_ZERO;
         keys.get(11).type = DialKeyBean.TYPE_DELETE;
 
-        RetrofitHelper.getApi().getThreadInfo().subscribe(new Action1<BaseResponse<HomeFuncBean>>() {
+        RetrofitHelper.getApi().getThirdInfo().subscribe(new Action1<BaseResponse<HomeFuncBean>>() {
             @Override
             public void call(BaseResponse<HomeFuncBean> response) {
                 if (response != null && response.data != null && TextUtils.equals(response.data.status, "1")) {

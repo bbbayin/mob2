@@ -77,7 +77,8 @@ public class SettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.bind_rl:
-                startActivity(new Intent(SettingActivity.this, BindMobileActivity.class));
+                Intent intent3 = new Intent(this, SetSecretInfoActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.modify_rl:
                 Intent intent = new Intent(SettingActivity.this, ForgetPwdActivity.class);

@@ -8,6 +8,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
@@ -83,7 +84,7 @@ public class CallTypeActivity extends BaseActivity {
     }
 
     private void initData() {
-        RetrofitHelper.getApi().getThreadInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
+        RetrofitHelper.getApi().getThirdInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
             @Override
             public void onNext(BaseResponse<HomeFuncBean> response) {
                 if (response != null && response.data != null && TextUtils.equals(response.data.status, "1")) {

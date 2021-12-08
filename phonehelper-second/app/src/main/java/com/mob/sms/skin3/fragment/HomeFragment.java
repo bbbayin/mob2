@@ -47,6 +47,7 @@ import com.mob.sms.skin3.bean.BannerBean;
 import com.mob.sms.skin3.bean.ChannelChargeBean;
 import com.mob.sms.skin3.bean.CloudPermissionBean;
 import com.mob.sms.skin3.bean.HomeFuncBean;
+import com.mob.sms.skin3.bean.PhoneNumberBean;
 import com.mob.sms.skin3.config.GlobalConfig;
 import com.mob.sms.skin3.db.CallContactTable;
 import com.mob.sms.skin3.db.DatabaseBusiness;
@@ -59,6 +60,7 @@ import com.mob.sms.skin3.dialog.SetCallNumDialog;
 import com.mob.sms.skin3.dialog.SetCallTimingDialog;
 import com.mob.sms.skin3.dialog.SetMultiCallIntervalDialog;
 import com.mob.sms.skin3.network.RetrofitHelper;
+import com.mob.sms.skin3.network.bean.BaseBean;
 import com.mob.sms.skin3.network.bean.BaseResponse;
 import com.mob.sms.skin3.network.bean.UserInfoBean;
 import com.mob.sms.skin3.rx.BaseObserver;
@@ -82,6 +84,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -682,7 +685,7 @@ public class HomeFragment extends BaseFragment {
                             }
                         }
                     });
-                }else  {
+                } else {
                     ToastUtil.show("请设置正确的号码");
                 }
                 break;
@@ -786,7 +789,7 @@ public class HomeFragment extends BaseFragment {
                             }
                         }
                     });
-                }else {
+                } else {
                     ToastUtil.show("请设置正确的间隔和号码");
                 }
                 break;
@@ -948,7 +951,7 @@ public class HomeFragment extends BaseFragment {
         if (requestCode == 999) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 autoSendSms();
-            }else {
+            } else {
                 ToastUtil.show("权限被拒绝无法正常使用功能");
                 CheckTipDialog dialog = new CheckTipDialog(getActivity());
                 dialog.setTitle("提示");
@@ -979,12 +982,12 @@ public class HomeFragment extends BaseFragment {
                     !TextUtils.isEmpty(mBjdxTip.getText().toString())) {
                 if (isShowSendTimes && TextUtils.isEmpty(mSmsFscsTip.getText().toString())) {
                     ToastUtil.show("请设置发送次数");
-                }else  {
+                } else {
                     intent = new Intent(getContext(), AutoSendSmsActivity.class);
                     intent.putExtra("type", "dhfs");
                     startActivity(intent);
                 }
-            }else  {
+            } else {
                 ToastUtil.show("请填写正确的手机号和短信内容");
             }
         } else {

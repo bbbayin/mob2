@@ -13,4 +13,7 @@ public class Constants {
     public final static String SIM_TYPE_SIM_1 = "sim1";// sim1
     public final static String SIM_TYPE_SIM_2 = "sim2";// sim2
     public final static String SIM_TYPE_SIM_MIX = "sim_double";// sim1+sim2
+
+    // 绑定的隐私号
+    public final static String SECRET_NUMBER = "secret_number";
 }

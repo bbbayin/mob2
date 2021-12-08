@@ -6,6 +6,7 @@ import com.mob.sms.skin3.bean.CloudPermissionBean;
 import com.mob.sms.skin3.bean.HomeFuncBean;
 import com.mob.sms.skin3.bean.MsgResponse;
 import com.mob.sms.skin3.bean.OneDialBean;
+import com.mob.sms.skin3.bean.PhoneNumberBean;
 import com.mob.sms.skin3.bean.UpdateBean;
 import com.mob.sms.skin3.network.bean.AuthoLoginBean;
 import com.mob.sms.skin3.network.bean.BaseBean;
@@ -41,6 +42,11 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface MyAPIService {
+
+    // 手机号维护
+    @GET("prod-api/restApi/tels/getTels")
+    Observable<BaseResponse<PhoneNumberBean>> getPhoneNumbers();
+
     //发送验证码
     @POST("prod-api/restApi/appUser/sendSms")
     Observable<BaseBean> sendSms(@Query("username") String username);
@@ -270,7 +276,7 @@ public interface MyAPIService {
 
     //获取第三方接口信息,status用于显示隐藏=0隐藏 1显示
     @POST("prod-api/restApi/third/getThirdInfo")
-    Observable<BaseResponse<HomeFuncBean>> getThreadInfo();
+    Observable<BaseResponse<HomeFuncBean>> getThirdInfo();
 
     // 消息
     @POST("prod-api/restApi/message/getMsg")

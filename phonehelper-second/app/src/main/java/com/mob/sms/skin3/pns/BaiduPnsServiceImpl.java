@@ -1,6 +1,7 @@
 package com.mob.sms.skin3.pns;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mob.sms.skin3.utils.SPUtils;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -31,10 +32,11 @@ public class BaiduPnsServiceImpl {
     	JSONObject data = new JSONObject();
     	data.put("telA", telA); //A号码
 		data.put("telB", telB); //B号码
-    	//data.put("telX", "17801483029"); //X号码
-		Random random = new Random();
-		int randomValue = random.nextInt(10);
-    	data.put("areaCode", areacodes[randomValue]); //需要X号码所属区号
+		String xNumber = SPUtils.getString("secret_number", "");
+		data.put("telX", xNumber); //X号码
+//		Random random = new Random();
+//		int randomValue = random.nextInt(10);
+//    	data.put("areaCode", areacodes[randomValue]); //需要X号码所属区号
     	data.put("record", 0); //是否录音，1：录音；0：不录音
     	data.put("expiration", 600); //绑定失效时间（秒）
     	//data.put("customer", ""); //随传数据

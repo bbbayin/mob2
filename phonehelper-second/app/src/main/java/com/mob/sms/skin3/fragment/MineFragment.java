@@ -387,7 +387,7 @@ public class MineFragment extends BaseFragment {
         if (isVisibleToUser && isCreated) {
             getUserInfo();
             // 隐藏拨号功能是否隐藏
-            RetrofitHelper.getApi().getThreadInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
+            RetrofitHelper.getApi().getThirdInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
                 @Override
                 public void onNext(BaseResponse<HomeFuncBean> response) {
                     if (response != null && response.data != null && TextUtils.equals(response.data.status, "1")) {
