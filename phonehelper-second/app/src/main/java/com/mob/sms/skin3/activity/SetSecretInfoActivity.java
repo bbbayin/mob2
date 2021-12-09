@@ -9,11 +9,13 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.mob.sms.skin3.R;
 import com.mob.sms.skin3.base.BaseActivity;
 import com.mob.sms.skin3.bean.PhoneNumberBean;
 import com.mob.sms.skin3.databinding.ActivitySecretInfoSettingLayoutBinding;
 import com.mob.sms.skin3.network.RetrofitHelper;
+import com.mob.sms.skin3.network.bean.UserInfoBean;
 import com.mob.sms.skin3.rx.BaseObserver;
 import com.mob.sms.skin3.rx.MobError;
 import com.mob.sms.skin3.utils.SPConstant;
@@ -21,6 +23,9 @@ import com.mob.sms.skin3.utils.SPUtils;
 import com.mob.sms.skin3.utils.ToastUtil;
 
 import java.util.Random;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class SetSecretInfoActivity extends BaseActivity {
 
@@ -83,6 +88,27 @@ public class SetSecretInfoActivity extends BaseActivity {
                         showConfigLayout(false);
                         ToastUtil.show(error.getErrorMsg());
                     }
+                });
+
+        // vip
+        RetrofitHelper.getApi().getUserInfo().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userInfoBean -> {
+                    if (userInfoBean != null && userInfoBean.code == 200) {
+                        UserInfoBean.DataBean mUserInfo = userInfoBean.data;
+
+                        if (mUserInfo.allMinute > 0) {
+                            // vip
+                            binding.callTypeTvSecretNumber.setVisibility(View.VISIBLE);
+                            binding.callTypeBtnChangeSecretNumber.setEnabled(true);
+                        } else {
+                            // 普通
+                            binding.callTypeTvSecretNumber.setVisibility(View.GONE);
+                            binding.callTypeBtnChangeSecretNumber.setEnabled(false);
+                        }
+                    }
+                }, throwable -> {
+                    throwable.printStackTrace();
                 });
     }
 
@@ -200,7 +226,7 @@ public class SetSecretInfoActivity extends BaseActivity {
         } else {
             // 判断次数
             if (times <= 0) {
-                ToastUtil.show(String.format("%s小时后可以切换绑定手机号", (hours - hour)));
+                ToastUtil.show(String.format("为了防止恶意拨号，每%s小时只可更换%s次隐私号，请稍等再试！", hours, defaultTimes));
                 return false;
             } else {
                 return true;
