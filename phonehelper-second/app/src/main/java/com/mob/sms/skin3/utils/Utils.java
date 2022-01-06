@@ -132,7 +132,7 @@ public class Utils {
         return null;
     }
 
-    public static List<PhoneAccountHandle> getAccountHandles(Context context) {
+    public static List<PhoneAccountHandle> getAccountHandles(Activity context) {
         Class c;
         Method m;
         TelecomManager telecomManager;
@@ -144,7 +144,8 @@ public class Utils {
             m = c.getMethod("getCallCapablePhoneAccounts");
             accountHandles = (List<PhoneAccountHandle>) m.invoke(telecomManager);
         } catch (Exception e) {
-            e.printStackTrace();
+            // 无权限
+            ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.READ_PHONE_NUMBERS}, 1);
         }
         return accountHandles;
     }

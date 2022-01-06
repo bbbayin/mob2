@@ -275,7 +275,7 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
                     Intent intent = new Intent(Intent.ACTION_CALL);
                     intent.setData(Uri.parse("tel:" + number));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(getContext());
+                    List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(getActivity());
                     if (phoneAccountHandleList.size() > sim) {
                         intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(sim));
                         startActivityForResult(intent, 888);
