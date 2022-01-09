@@ -1,8 +1,10 @@
 package com.mob.sms2;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -269,18 +272,23 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
             } else if (number.length() != 11) {
                 ToastUtil.show("手机号正确");
             } else {
-                // 1. 获取拨打的sim卡
-                TelecomManager telecomManager = (TelecomManager) getContext().getSystemService(Context.TELECOM_SERVICE);
-                if (telecomManager != null) {
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse("tel:" + number));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(getContext());
-                    if (phoneAccountHandleList.size() > sim) {
-                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(sim));
-                        startActivityForResult(intent, 888);
-                    } else {
-                        ToastUtil.show("请插入sim卡");
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_NUMBERS}, 1);
+                    return;
+                } else {
+                    // 1. 获取拨打的sim卡
+                    TelecomManager telecomManager = (TelecomManager) getContext().getSystemService(Context.TELECOM_SERVICE);
+                    if (telecomManager != null) {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse("tel:" + number));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(getContext());
+                        if (phoneAccountHandleList.size() > sim) {
+                            intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(sim));
+                            startActivityForResult(intent, 888);
+                        } else {
+                            ToastUtil.show("请插入sim卡");
+                        }
                     }
                 }
             }
