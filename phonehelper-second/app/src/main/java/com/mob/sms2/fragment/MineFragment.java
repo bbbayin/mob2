@@ -54,16 +54,10 @@ import com.mob.sms2.utils.SPConstant;
 import com.mob.sms2.utils.SPUtils;
 import com.mob.sms2.utils.ToastUtil;
 import com.mob.sms2.utils.Utils;
-import com.tencent.connect.share.QQShare;
-import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -390,7 +384,7 @@ public class MineFragment extends BaseFragment {
         if (isVisibleToUser && isCreated) {
             getUserInfo();
             // 隐藏拨号功能是否隐藏
-            RetrofitHelper.getApi().getThreadInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
+            RetrofitHelper.getApi().getThirdInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
                 @Override
                 public void onNext(BaseResponse<HomeFuncBean> response) {
                     if (response != null && response.data != null && TextUtils.equals(response.data.status, "1")) {

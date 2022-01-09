@@ -83,7 +83,7 @@ public class CallTypeActivity extends BaseActivity {
     }
 
     private void initData() {
-        RetrofitHelper.getApi().getThreadInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
+        RetrofitHelper.getApi().getThirdInfo().subscribe(new SimpleObserver<BaseResponse<HomeFuncBean>>() {
             @Override
             public void onNext(BaseResponse<HomeFuncBean> response) {
                 if (response != null && response.data != null && TextUtils.equals(response.data.status, "1")) {

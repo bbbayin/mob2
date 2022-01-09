@@ -264,7 +264,7 @@ public class RegisterActivity extends BaseActivity {
                 }
                 break;
             case R.id.select_iv:
-                showDialog();
+                checked(!mSelectAgreement);
                 break;
             case R.id.eye_icon:
                 mCanSeePwd = !mCanSeePwd;
@@ -292,6 +292,21 @@ public class RegisterActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    private void checked(boolean enable) {
+        mSelectAgreement = enable;
+        if (mSelectAgreement) {
+            mSelectIv.setBackgroundResource(R.mipmap.selected_icon);
+        }else {
+            mSelectIv.setBackgroundResource(R.mipmap.unselected_icon);
+        }
+        if(mTxMobile && mTxCode && mTxPwd && mTxPwd2 && mSelectAgreement){
+            mCanRegister = true;
+        } else {
+            mCanRegister = false;
+        }
+        mBtnRegister.setEnabled(mCanRegister);
     }
 
     private void showDialog() {

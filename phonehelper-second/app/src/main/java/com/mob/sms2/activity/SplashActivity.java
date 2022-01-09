@@ -17,11 +17,13 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.mob.sms2.R;
 import com.mob.sms2.adapter.SplashBannerAdapter;
+import com.mob.sms2.application.MyApplication;
 import com.mob.sms2.base.SimpleObserver;
 import com.mob.sms2.bean.BannerBean;
 import com.mob.sms2.dialog.UserAgreementDialog;
 import com.mob.sms2.network.RetrofitHelper;
 import com.mob.sms2.network.bean.BaseResponse;
+import com.mob.sms2.sdk.SDKManager;
 import com.mob.sms2.utils.SPConstant;
 import com.mob.sms2.utils.SPUtils;
 import com.mob.sms2.utils.ToastUtil;
@@ -47,6 +49,7 @@ public class SplashActivity extends Activity {
     View logoText;
 
     private final int MSG_SKIP = 0;
+    private SDKManager sdkManager;
 
 
     @Override
@@ -56,6 +59,8 @@ public class SplashActivity extends Activity {
         ButterKnife.bind(this);
         initView();
         initGlobalData();
+        sdkManager = new SDKManager();
+        sdkManager.addObserver(MyApplication.mApplication);
     }
 
     private void showPolicyDialog() {
@@ -65,6 +70,7 @@ public class SplashActivity extends Activity {
             @Override
             public void agree() {
                 userAgreementDialog.dismiss();
+                sdkManager.init();
                 SPUtils.put(SPConstant.SP_USER_PERMISSION_OK, true);
                 mHandler.sendEmptyMessageDelayed(MSG_SKIP, 500);
             }

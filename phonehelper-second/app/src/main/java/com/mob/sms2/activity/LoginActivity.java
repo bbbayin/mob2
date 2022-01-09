@@ -98,6 +98,8 @@ public class LoginActivity extends BaseActivity {
         ImmersionBar.with(this).statusBarColor(R.color.colorPrimary).init();
     }
     private void showPolicyDialog() {
+        Boolean aBoolean = SPUtils.getBoolean(SPConstant.SP_USER_PERMISSION_OK, false);
+        if (aBoolean) return;
         UserAgreementDialog userAgreementDialog = new UserAgreementDialog(this);
         userAgreementDialog.show();
         userAgreementDialog.setOnClickListener(new UserAgreementDialog.OnClickListener() {

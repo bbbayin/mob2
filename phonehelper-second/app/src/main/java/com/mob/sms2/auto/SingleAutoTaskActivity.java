@@ -220,7 +220,7 @@ public class SingleAutoTaskActivity extends BaseActivity {
                     },
                     null);
         } else {
-            showProgress("获取隐私号码...");
+            showProgress("绑定隐私号码...");
             new Thread() {
                 @Override
                 public void run() {
@@ -230,6 +230,7 @@ public class SingleAutoTaskActivity extends BaseActivity {
                     Log.d("绑定隐私号结果", s);
                     hideProgress();
                     //{"code":"0","msg":"成功","data":{"bindId":"2411790078574043902","telX":"18468575717"}}
+                    //{"code":"10003","msg":"号码已有相关绑定关系","data":null}
                     try {
                         JSONObject jsonObject = new JSONObject(s);
                         JSONObject data = jsonObject.optJSONObject("data");
@@ -238,13 +239,19 @@ public class SingleAutoTaskActivity extends BaseActivity {
                             if (!TextUtils.isEmpty(telX)) {
                                 bindTelxSuccess(telX);
                             } else {
-                                bindTelxFailed();
+                                bindTelxFailed(jsonObject.optString("msg"));
                             }
                         } else {
-                            bindTelxFailed();
+                            String code = jsonObject.optString("code");
+                            if ("10003".equals(code)) {
+                                String phone = SPUtils.getString(Constants.SECRET_NUMBER, "");
+                                bindTelxSuccess(phone);
+                            }else {
+                                bindTelxFailed(jsonObject.optString("msg"));
+                            }
                         }
                     } catch (JSONException e) {
-                        bindTelxFailed();
+                        bindTelxFailed(e.getMessage());
                     }
                 }
             }.start();
@@ -257,17 +264,17 @@ public class SingleAutoTaskActivity extends BaseActivity {
             @Override
             public void run() {
                 mDestNumber = telX;
-                ToastUtil.show("隐私号获取成功");
+                ToastUtil.show("隐私号绑定成功");
                 startTimer(mDelay);
             }
         });
     }
 
-    private void bindTelxFailed() {
+    private void bindTelxFailed(String errorMsg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Utils.showDialog(SingleAutoTaskActivity.this, "隐私号码获取失败，请重试",
+                Utils.showDialog(SingleAutoTaskActivity.this, "隐私号码绑定失败，请重试，错误信息："+errorMsg,
                         "提示", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

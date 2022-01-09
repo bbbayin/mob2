@@ -1,6 +1,7 @@
 package com.mob.sms2.pns;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mob.sms2.utils.SPUtils;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -25,26 +26,27 @@ public class BaiduPnsServiceImpl {
      * @param telA 需要绑定的电话号码
      * @throws Exception 
      */
-    public String bindingAxb(String telA, String telB) {
+	public String bindingAxb(String telA, String telB) {
 		String[] areacodes = new String[]{"10", "21", "20", "765", "22", "28", "571", "25", "512", "566"};
-    	
-    	JSONObject data = new JSONObject();
-    	data.put("telA", telA); //A号码
+
+		JSONObject data = new JSONObject();
+		data.put("telA", telA); //A号码
 		data.put("telB", telB); //B号码
-    	//data.put("telX", "17801483029"); //X号码
-		Random random = new Random();
-		int randomValue = random.nextInt(10);
-    	data.put("areaCode", areacodes[randomValue]); //需要X号码所属区号
-    	data.put("record", 0); //是否录音，1：录音；0：不录音
-    	data.put("expiration", 600); //绑定失效时间（秒）
-    	//data.put("customer", ""); //随传数据
-    	
-    	String utcTime = getUTCTime(); //获取当前utc时间
-    	String authStringPrefix = String.format("bce-auth-v1/%s/%s/%s", ACCESS_KEY_ID, utcTime, data.getString("expiration") );
-    	// \n 为换行符，host前面有两个\n\n 因为没有把请求参数放进去但位置要保留，所以有两个
-    	String canonicalRequest = "POST\n/cloud/api/v1/axb/binding\n\nhost:pns.baidubce.com";
-    	
-    	try {
+		String xNumber = SPUtils.getString("secret_number", "");
+		data.put("telX", xNumber); //X号码
+//		Random random = new Random();
+//		int randomValue = random.nextInt(10);
+//    	data.put("areaCode", areacodes[randomValue]); //需要X号码所属区号
+		data.put("record", 0); //是否录音，1：录音；0：不录音
+		data.put("expiration", 600); //绑定失效时间（秒）
+		//data.put("customer", ""); //随传数据
+
+		String utcTime = getUTCTime(); //获取当前utc时间
+		String authStringPrefix = String.format("bce-auth-v1/%s/%s/%s", ACCESS_KEY_ID, utcTime, data.getString("expiration") );
+		// \n 为换行符，host前面有两个\n\n 因为没有把请求参数放进去但位置要保留，所以有两个
+		String canonicalRequest = "POST\n/cloud/api/v1/axb/binding\n\nhost:pns.baidubce.com";
+
+		try {
 			String signingKey = HMAC_SHA256_HEX(SECRET_ACCESS_KEY, authStringPrefix); //加密
 			String signature = HMAC_SHA256_HEX(signingKey, canonicalRequest); //在加密，得到signature
 			//生成认证字符串  https://cloud.baidu.com/doc/Reference/s/njwvz1yfu 
@@ -55,10 +57,10 @@ public class BaiduPnsServiceImpl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	
-    	return null;
-    	
-    }
+
+		return null;
+
+	}
     
     
     /**
