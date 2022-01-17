@@ -13,6 +13,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import com.mob.sms.skin3.BuildConfig;
+
 public class ChannelUtil {
 	
 	private static final String CHANNEL_KEY = "cztchannel";
@@ -24,6 +26,9 @@ public class ChannelUtil {
 	 * @return
 	 */
 	public static String getChannel(Context context){
+		if (BuildConfig.DEBUG) {
+			return "yingyongbao";
+		}
 		return getChannel(context, "develop");
 	}
 	/**

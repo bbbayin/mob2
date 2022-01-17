@@ -17,6 +17,7 @@ import com.mob.sms.skin3.network.RetrofitHelper;
 import com.mob.sms.skin3.network.bean.UserInfoBean;
 import com.mob.sms.skin3.rx.BaseObserver;
 import com.mob.sms.skin3.rx.MobError;
+import com.mob.sms.skin3.utils.Constants;
 import com.mob.sms.skin3.utils.SPConstant;
 import com.mob.sms.skin3.utils.SPUtils;
 import com.mob.sms.skin3.utils.ToastUtil;
@@ -43,7 +44,6 @@ public class SetSecretInfoActivity extends BaseActivity {
         initData();
     }
 
-    private String SECRETE_NUMBER = "secret_number";
     private String CHANGE_NUMBER_TIME = "change_number_time";
     private String SP_USED_TIMES = "sp_used_times";// 使用的更换次数
     private String SP_MAX_TIMES = "sp_max_times";// 指定时间段内允许更换的次数
@@ -64,13 +64,13 @@ public class SetSecretInfoActivity extends BaseActivity {
                                 hours = Integer.parseInt(data.hours);
                                 defaultTimes = Integer.parseInt(data.num);
                                 // 已绑定的隐私号
-                                String secreteNumber = SPUtils.getString(SECRETE_NUMBER, "");
+                                String secreteNumber = SPUtils.getString(Constants.SECRET_NUMBER, "");
                                 if (!TextUtils.isEmpty(secreteNumber)) {
                                     binding.callTypeTvSecretNumber.setText(secreteNumber);
                                 } else {
                                     // 随机一个
                                     String phone = getRandomPhone();
-                                    SPUtils.put(SECRETE_NUMBER, phone);
+                                    SPUtils.put(Constants.SECRET_NUMBER, phone);
                                     binding.callTypeTvSecretNumber.setText(phone);
                                 }
                             } else {
@@ -188,7 +188,7 @@ public class SetSecretInfoActivity extends BaseActivity {
                 while (randomPhone.equals(nowPhone)) {
                     randomPhone = getRandomPhone();
                 }
-                SPUtils.put(SECRETE_NUMBER, randomPhone);
+                SPUtils.put(Constants.SECRET_NUMBER, randomPhone);
                 saveChangeTime();
                 handler.postDelayed(new Runnable() {
                     @Override

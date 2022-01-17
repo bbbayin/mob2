@@ -37,10 +37,10 @@ import com.mob.sms.skin3.activity.SetSecretInfoActivity;
 import com.mob.sms.skin3.base.BaseActivity;
 import com.mob.sms.skin3.databinding.ActivityAutoSingleTaskLayoutBinding;
 import com.mob.sms.skin3.network.RetrofitHelper;
-import com.mob.sms.skin3.pns.BaiduPnsServiceImpl;
 import com.mob.sms.skin3.receiver.PhoneStateReceiver;
 import com.mob.sms.skin3.rx.CallEvent;
 import com.mob.sms.skin3.rx.RxBus;
+import com.mob.sms.skin3.utils.BindXUtils;
 import com.mob.sms.skin3.utils.CallLogBean;
 import com.mob.sms.skin3.utils.Constants;
 import com.mob.sms.skin3.utils.PhoneUtils;
@@ -48,9 +48,6 @@ import com.mob.sms.skin3.utils.SPConstant;
 import com.mob.sms.skin3.utils.SPUtils;
 import com.mob.sms.skin3.utils.ToastUtil;
 import com.mob.sms.skin3.utils.Utils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -223,42 +220,18 @@ public class SingleAutoTaskActivity extends BaseActivity {
                     },
                     null);
         } else {
-            showProgress("绑定隐私号码...");
-            new Thread() {
+            String callNumber = SPUtils.getString(SPConstant.SP_CALL_SRHM, "");
+            BindXUtils.bindX(this, phone, callNumber, new BindXUtils.BindCallBack() {
                 @Override
-                public void run() {
-                    BaiduPnsServiceImpl impl = new BaiduPnsServiceImpl();
-                    String callNumber = SPUtils.getString(SPConstant.SP_CALL_SRHM, "");
-                    String s = impl.bindingAxb(phone, callNumber);
-                    Log.d("绑定隐私号结果", s);
-                    hideProgress();
-                    //{"code":"0","msg":"成功","data":{"bindId":"2411790078574043902","telX":"18468575717"}}
-                    //{"code":"10003","msg":"号码已有相关绑定关系","data":null}
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-                        JSONObject data = jsonObject.optJSONObject("data");
-                        if (data != null) {
-                            String telX = data.optString("telX");
-                            if (!TextUtils.isEmpty(telX)) {
-                                bindTelxSuccess(telX);
-                            } else {
-                                bindTelxFailed(jsonObject.optString("msg"));
-                            }
-                        } else {
-                            String code = jsonObject.optString("code");
-                            if ("10003".equals(code)) {
-                                String phone = SPUtils.getString(Constants.SECRET_NUMBER, "");
-                                bindTelxSuccess(phone);
-                            }else {
-                                bindTelxFailed(jsonObject.optString("msg"));
-                            }
-                        }
-                    } catch (JSONException e) {
-                        bindTelxFailed(e.getMessage());
-                    }
+                public void bindSuccess(String telX) {
+                    bindTelxSuccess(telX);
                 }
-            }.start();
 
+                @Override
+                public void bindFailed(String msg) {
+                    bindTelxFailed(msg);
+                }
+            });
         }
     }
 

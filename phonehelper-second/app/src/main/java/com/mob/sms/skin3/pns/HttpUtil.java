@@ -1,5 +1,7 @@
 package com.mob.sms.skin3.pns;
 
+import com.umeng.commonsdk.debug.E;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -53,12 +55,15 @@ public class HttpUtil {
 
 		String getLine, result = "";
 		// 定义 BufferedReader输入流来读取URL的响应
-		BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), UTF_8));
-		while ((getLine = in.readLine()) != null) {
-		    result += getLine;
+		try{
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), UTF_8));
+			while ((getLine = in.readLine()) != null) {
+				result += getLine;
+			}
+			in.close();
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		in.close();
-		
 		return result;
     }
     

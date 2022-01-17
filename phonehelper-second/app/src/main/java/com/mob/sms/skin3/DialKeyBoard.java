@@ -1,8 +1,10 @@
 package com.mob.sms.skin3;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
@@ -15,17 +17,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mob.sms.skin3.activity.SetSecretInfoActivity;
 import com.mob.sms.skin3.activity.VipActivity;
+import com.mob.sms.skin3.auto.SingleAutoTaskActivity;
 import com.mob.sms.skin3.bean.CloudPermissionBean;
 import com.mob.sms.skin3.bean.HomeFuncBean;
 import com.mob.sms.skin3.network.RetrofitHelper;
 import com.mob.sms.skin3.network.bean.BaseResponse;
 import com.mob.sms.skin3.pns.BaiduPnsServiceImpl;
+import com.mob.sms.skin3.utils.BindXUtils;
+import com.mob.sms.skin3.utils.Constants;
 import com.mob.sms.skin3.utils.FreeCheckUtils;
 import com.mob.sms.skin3.utils.MyItemDecoration;
 import com.mob.sms.skin3.utils.SPConstant;
@@ -48,6 +54,9 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
     private static final List<DialKeyBean> keys = new ArrayList<>();
     private TextView tvInput;
     private View secretLayout;
+    // 是否已校验过vip
+    private boolean hasChecked = false;
+    private boolean isVip = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -160,8 +169,8 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
      * 获取隐私号
      */
     private void bindSecretNumber() {
-        String phone = SPUtils.getString(SPConstant.SP_USER_PHONE, "");
-        if (TextUtils.isEmpty(phone)) {
+        String userPhone = SPUtils.getString(SPConstant.SP_USER_PHONE, "");
+        if (TextUtils.isEmpty(userPhone)) {
             Utils.showDialog(getActivity(), "请先设置隐私拨号信息", "提示",
                     new View.OnClickListener() {
                         @Override
@@ -171,35 +180,18 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
                     },
                     null);
         } else {
-            showProgress("获取隐私号码...");
-            new Thread() {
+            String callNumber = tvInput.getText().toString();
+            BindXUtils.bindX(getActivity(), userPhone, callNumber, new BindXUtils.BindCallBack() {
                 @Override
-                public void run() {
-                    BaiduPnsServiceImpl impl = new BaiduPnsServiceImpl();
-                    String callNumber = tvInput.getText().toString();
-                    String s = impl.bindingAxb(phone, callNumber);
-                    Log.d("绑定隐私号结果", s);
-                    hideProgress();
-                    //{"code":"0","msg":"成功","data":{"bindId":"2411790078574043902","telX":"18468575717"}}
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-                        JSONObject data = jsonObject.optJSONObject("data");
-                        if (data != null) {
-                            String telX = data.optString("telX");
-                            if (!TextUtils.isEmpty(telX)) {
-                                bindTelxSuccess(telX);
-                            } else {
-                                bindTelxFailed();
-                            }
-                        } else {
-                            bindTelxFailed();
-                        }
-                    } catch (JSONException e) {
-                        bindTelxFailed();
-                    }
+                public void bindSuccess(String telX) {
+                    bindTelxSuccess(telX);
                 }
-            }.start();
 
+                @Override
+                public void bindFailed(String msg) {
+                    bindTelxFailed(msg);
+                }
+            });
         }
     }
 
@@ -210,32 +202,34 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
             @Override
             public void run() {
                 secretNumber = telX;
-                ToastUtil.show("隐私号获取成功");
+                ToastUtil.show("隐私号绑定成功");
                 int sim = SPUtils.getInt(SPConstant.SP_SECRET_SIM_NO, 0);
                 callPhone(secretNumber, sim);
             }
         });
     }
 
-    private void bindTelxFailed() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Utils.showDialog(getActivity(), "隐私号码获取失败，请重试",
-                        "提示", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                bindSecretNumber();
-                            }
-                        },
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                            }
-                        });
-            }
-        });
+    private void bindTelxFailed(String errorMsg) {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Utils.showDialog(getActivity(), "隐私号码绑定失败，请重试，错误信息：" + errorMsg,
+                            "提示", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    bindSecretNumber();
+                                }
+                            },
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dismiss();
+                                }
+                            });
+                }
+            });
+        }
     }
 
     private ProgressDialog progressDialog;
@@ -269,18 +263,21 @@ public class DialKeyBoard extends BottomSheetDialogFragment implements View.OnCl
             } else if (number.length() != 11) {
                 ToastUtil.show("手机号正确");
             } else {
-                // 1. 获取拨打的sim卡
-                TelecomManager telecomManager = (TelecomManager) getContext().getSystemService(Context.TELECOM_SERVICE);
-                if (telecomManager != null) {
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse("tel:" + number));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(getActivity());
-                    if (phoneAccountHandleList.size() > sim) {
-                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(sim));
-                        startActivityForResult(intent, 888);
-                    } else {
-                        ToastUtil.show("请插入sim卡");
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    ToastUtil.show("请授于APP必要权限才能使用");
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.READ_PHONE_NUMBERS}, 1);
+                }else {
+                    TelecomManager telecomManager = (TelecomManager) getContext().getSystemService(Context.TELECOM_SERVICE);
+                    if (telecomManager != null) {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse("tel:" + number));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(getActivity());
+                        if (phoneAccountHandleList.size() > sim) {
+                            intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(sim));
+                            startActivityForResult(intent, 888);
+                        }
                     }
                 }
             }

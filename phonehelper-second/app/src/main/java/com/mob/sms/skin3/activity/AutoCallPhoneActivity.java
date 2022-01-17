@@ -18,7 +18,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,6 +34,7 @@ import com.mob.sms.skin3.db.CallContactTable;
 import com.mob.sms.skin3.db.DatabaseBusiness;
 import com.mob.sms.skin3.network.RetrofitHelper;
 import com.mob.sms.skin3.pns.BaiduPnsServiceImpl;
+import com.mob.sms.skin3.utils.BindXUtils;
 import com.mob.sms.skin3.utils.CollectionUtils;
 import com.mob.sms.skin3.utils.Constants;
 import com.mob.sms.skin3.utils.SPConstant;
@@ -143,47 +143,29 @@ public class AutoCallPhoneActivity extends BaseActivity {
         });
     }
 
-    private void bindSecretNumber() {
+    private void bindSecretNumber(final String mobile) {
         String phone = SPUtils.getString(SPConstant.SP_USER_PHONE, "");
         if (TextUtils.isEmpty(phone)) {
             Utils.showDialog(this, "请先绑定手机号", "提示",
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(AutoCallPhoneActivity.this, BindMobileActivity.class));
+                            startActivity(new Intent(AutoCallPhoneActivity.this, SetSecretInfoActivity.class));
                         }
                     },
                     null);
         } else {
-            showProgress("获取隐私号码...");
-            new Thread() {
+            BindXUtils.bindX(this, phone, mobile, new BindXUtils.BindCallBack() {
                 @Override
-                public void run() {
-                    BaiduPnsServiceImpl impl = new BaiduPnsServiceImpl();
-                    String callNumber = SPUtils.getString(SPConstant.SP_CALL_SRHM, "");
-                    String s = impl.bindingAxb(phone, callNumber);
-                    Log.d("绑定隐私号结果", s);
-                    hideProgress();
-                    //{"code":"0","msg":"成功","data":{"bindId":"2411790078574043902","telX":"18468575717"}}
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-                        JSONObject data = jsonObject.optJSONObject("data");
-                        if (data != null) {
-                            String telX = data.optString("telX");
-                            if (!TextUtils.isEmpty(telX)) {
-                                bindTelxSuccess(telX);
-                            } else {
-                                bindTelxFailed();
-                            }
-                        } else {
-                            bindTelxFailed();
-                        }
-                    } catch (JSONException e) {
-                        bindTelxFailed();
-                    }
+                public void bindSuccess(String telX) {
+                    bindTelxSuccess(telX);
                 }
-            }.start();
 
+                @Override
+                public void bindFailed(String msg) {
+                    bindTelxFailed(mobile, msg);
+                }
+            });
         }
     }
 
@@ -191,20 +173,63 @@ public class AutoCallPhoneActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                dialNumber = telX;
+                callPhoneX(telX);
             }
         });
     }
 
-    private void bindTelxFailed() {
+    private void callPhoneX(String telX) {
+
+        try {
+            TelecomManager telecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
+            if (telecomManager != null) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + telX));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                String simType = SPUtils.getString(SPConstant.SP_CALL_SKSZ, Constants.SIM_TYPE_SIM_1);
+                for (int i = 0; i < dualSimTypes.length; i++) {
+                    //0代表卡1,1代表卡2
+                    if (Constants.SIM_TYPE_SIM_1.equals(simType)) {
+                        intent.putExtra(dualSimTypes[i], 0);
+                    } else if (Constants.SIM_TYPE_SIM_2.equals(simType)) {
+                        intent.putExtra(dualSimTypes[i], 1);
+                    } else if (Constants.SIM_TYPE_SIM_MIX.equals(simType)) {
+                        intent.putExtra(dualSimTypes[i], mSim1Call ? 0 : 1);
+                        mSim1Call = !mSim1Call;
+                    } else if (Constants.SIM_TYPE_SECRET.equals(simType)) {
+                        intent.putExtra(dualSimTypes[i], 0);
+                    }
+                }
+//                List<PhoneAccountHandle> phoneAccountHandleList = telecomManager.getCallCapablePhoneAccounts();
+                List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(this);
+                if (phoneAccountHandleList.size() > 0) {
+                    if (Constants.SIM_TYPE_SIM_1.equals(simType)) {
+                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(0));
+                    } else if (Constants.SIM_TYPE_SIM_2.equals(simType)) {
+                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(1));
+                    } else if (Constants.SIM_TYPE_SIM_MIX.equals(simType)) {
+                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(mSim1Call ? 1 : 0));
+                    } else if (Constants.SIM_TYPE_SECRET.equals(simType)) {
+                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(1));
+                    }
+                }
+                startActivity(intent);
+                isOutCalling = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void bindTelxFailed(String mobile, String msg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Utils.showDialog(AutoCallPhoneActivity.this, "隐私号码获取失败，请重试",
+                Utils.showDialog(AutoCallPhoneActivity.this, msg,
                         "提示", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                bindSecretNumber();
+                                bindSecretNumber(mobile);
                             }
                         },
                         new View.OnClickListener() {
@@ -275,46 +300,7 @@ public class AutoCallPhoneActivity extends BaseActivity {
     }
 
     private void callPhone(String mobile) {
-        Log.i("jqt", "mobile: " + mobile);
-        try {
-            TelecomManager telecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
-            if (telecomManager != null) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + mobile));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                String simType = SPUtils.getString(SPConstant.SP_CALL_SKSZ, Constants.SIM_TYPE_SIM_1);
-                for (int i = 0; i < dualSimTypes.length; i++) {
-                    //0代表卡1,1代表卡2
-                    if (Constants.SIM_TYPE_SIM_1.equals(simType)) {
-                        intent.putExtra(dualSimTypes[i], 0);
-                    } else if (Constants.SIM_TYPE_SIM_2.equals(simType)) {
-                        intent.putExtra(dualSimTypes[i], 1);
-                    } else if (Constants.SIM_TYPE_SIM_MIX.equals(simType)) {
-                        intent.putExtra(dualSimTypes[i], mSim1Call ? 0 : 1);
-                        mSim1Call = !mSim1Call;
-                    } else if (Constants.SIM_TYPE_SECRET.equals(simType)) {
-                        intent.putExtra(dualSimTypes[i], 0);
-                    }
-                }
-//                List<PhoneAccountHandle> phoneAccountHandleList = telecomManager.getCallCapablePhoneAccounts();
-                List<PhoneAccountHandle> phoneAccountHandleList = Utils.getAccountHandles(this);
-                if (phoneAccountHandleList.size() > 0) {
-                    if (Constants.SIM_TYPE_SIM_1.equals(simType)) {
-                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(0));
-                    } else if (Constants.SIM_TYPE_SIM_2.equals(simType)) {
-                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(1));
-                    } else if (Constants.SIM_TYPE_SIM_MIX.equals(simType)) {
-                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(mSim1Call ? 1 : 0));
-                    } else if (Constants.SIM_TYPE_SECRET.equals(simType)) {
-                        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandleList.get(1));
-                    }
-                }
-                startActivity(intent);
-                isOutCalling = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        bindSecretNumber(mobile);
     }
 
     @Override
@@ -386,7 +372,7 @@ public class AutoCallPhoneActivity extends BaseActivity {
 
     private void onFinish() {
         releaseCounter();
-        if(mTm != null) {
+        if (mTm != null) {
             mTm.listen(listener, PhoneStateListener.LISTEN_NONE);
         }
     }

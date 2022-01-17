@@ -9,12 +9,15 @@ import com.mob.sms.skin3.bean.CloudPermissionBean;
 import com.mob.sms.skin3.config.GlobalConfig;
 import com.mob.sms.skin3.network.RetrofitHelper;
 import com.mob.sms.skin3.network.bean.BaseResponse;
+import com.sun.jmx.snmp.SnmpNull;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class FreeCheckUtils {
+    private static long lastCheckTime = 0;
+    private static boolean isFree = false;
 
     public static boolean isSecretCall() {
         String sim = (String) SPUtils.get(SPConstant.SP_SIM_CARD_TYPE, "");
@@ -22,7 +25,28 @@ public class FreeCheckUtils {
     }
 
     public static void check(Activity activity, boolean isSecretCall, OnCheckCallback callback) {
-        checkPermission(activity, isSecretCall, callback);
+        if (GlobalConfig.isVip) {
+            callback.onResult(true);
+        } else {
+            long duration = System.currentTimeMillis() - lastCheckTime;
+            long seconds = duration / 1000;
+            lastCheckTime = System.currentTimeMillis();
+            // 小于1分钟 且 是vip不用重复校验
+            if (seconds < 60 && isFree && callback != null) {
+                callback.onResult(true);
+            } else {
+                checkPermission(activity, isSecretCall, callback);
+            }
+        }
+//        long duration = System.currentTimeMillis() - lastCheckTime;
+//        long seconds = duration / 1000;
+//        lastCheckTime = System.currentTimeMillis();
+//        // 小于1分钟 且 是vip不用重复校验
+//        if (seconds < 60 && isFree && callback != null) {
+//            callback.onResult(true);
+//        } else {
+//            checkPermission(activity, isSecretCall, callback);
+//        }
     }
 
     private static void checkPermission(Activity activity, boolean isSecretCall, OnCheckCallback callback) {
@@ -37,9 +61,6 @@ public class FreeCheckUtils {
                                     if (callback != null) {
                                         callback.onResult(true);
                                     }
-//                                    Intent intent = new Intent(activity, SingleAutoTaskActivity.class);
-//                                    intent.putExtra("type", "dhbd");
-//                                    activity.startActivity(intent);
                                     break;
                                 default:
                                     checkUserVip(activity, isSecretCall, callback);
@@ -66,10 +87,12 @@ public class FreeCheckUtils {
                     public void call(CloudPermissionBean permissionBean) {
                         if (permissionBean != null && "200".equals(permissionBean.code)) {
                             // 有权限
+                            isFree = true;
                             if (callback != null) {
                                 callback.onResult(true);
                             }
                         } else {
+                            isFree = false;
                             if (isSecretCall && GlobalConfig.isVip) {
                                 ToastUtil.showLong(permissionBean.msg);
                             } else {
