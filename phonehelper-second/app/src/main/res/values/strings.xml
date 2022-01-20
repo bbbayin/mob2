@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">隐藏号码拨号</string>
+    <string name="app_name">隐藏号码网络拨号</string>
     <string name="send_code_success">验证码发送成功</string>
     <string name="send_code_fail">验证码发送失败</string>
 

@@ -15,7 +15,9 @@ import com.mob.sms.skin3.pns.BaiduPnsServiceImpl;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
+import java.nio.file.Files;
 
 /**
  * 绑定隐私号工具类
@@ -24,18 +26,7 @@ public class BindXUtils {
     private static ProgressDialog progressDialog;
     private final static int SHOW = 1;
     private final static int HIDE = 2;
-    private static Handler mainHandler = new android.os.Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case SHOW:
-                    break;
-                case HIDE:
-                    break;
-            }
-        }
-    };
+    private static Handler mainHandler = new android.os.Handler(Looper.getMainLooper());
 
     public static void bindX(Activity activity, String callerPhone, String dialNumber, BindCallBack bindCallBack) {
         if (activity != null) {
@@ -103,6 +94,7 @@ public class BindXUtils {
 
     private static void showProgress(String msg, WeakReference<Activity> ref) {
         try {
+
             if (progressDialog == null && ref != null && ref.get() != null) {
                 progressDialog = new ProgressDialog(ref.get());
             }
@@ -122,8 +114,12 @@ public class BindXUtils {
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                if (progressDialog != null && progressDialog.isShowing()) {
-                    progressDialog.dismiss();
+                try {
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (Exception e) {
+
                 }
             }
         });
