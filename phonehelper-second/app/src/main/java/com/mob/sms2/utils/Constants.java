@@ -16,4 +16,5 @@ public class Constants {
 
     // 绑定的隐私号
     public final static String SECRET_NUMBER = "secret_number";
+    public final static String BINDX_BIND_ID = "bind_id";// 百度隐私号绑定成功的id；
 }

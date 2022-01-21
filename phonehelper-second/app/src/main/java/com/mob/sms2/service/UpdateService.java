@@ -58,7 +58,7 @@ public class UpdateService extends IntentService {
                         if (data != null) {
                             String versioncode = data.getNo();
                             try {
-                                int code = Integer.parseInt(data.getNo());
+                                double code = Double.parseDouble(data.getNo());
                                 if (BuildConfig.VERSION_CODE < code) {
                                     // 升级
                                     WeakReference<Activity> currentActivity = AppManager.getCurrentActivity();

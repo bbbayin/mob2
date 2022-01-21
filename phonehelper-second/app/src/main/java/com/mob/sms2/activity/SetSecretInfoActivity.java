@@ -17,6 +17,7 @@ import com.mob.sms2.network.RetrofitHelper;
 import com.mob.sms2.network.bean.UserInfoBean;
 import com.mob.sms2.rx.BaseObserver;
 import com.mob.sms2.rx.MobError;
+import com.mob.sms2.utils.Constants;
 import com.mob.sms2.utils.SPConstant;
 import com.mob.sms2.utils.SPUtils;
 import com.mob.sms2.utils.ToastUtil;
@@ -43,9 +44,9 @@ public class SetSecretInfoActivity extends BaseActivity {
         initData();
     }
 
-    private String SECRETE_NUMBER = "secret_number";
     private String CHANGE_NUMBER_TIME = "change_number_time";
-    private String SP_TIMES = "sp_times";
+    private String SP_USED_TIMES = "sp_used_times";// 使用的更换次数
+    private String SP_MAX_TIMES = "sp_max_times";// 指定时间段内允许更换的次数
     private String[] phoneList;
     private int hours;
     private int defaultTimes;
@@ -63,13 +64,13 @@ public class SetSecretInfoActivity extends BaseActivity {
                                 hours = Integer.parseInt(data.hours);
                                 defaultTimes = Integer.parseInt(data.num);
                                 // 已绑定的隐私号
-                                String secreteNumber = SPUtils.getString(SECRETE_NUMBER, "");
+                                String secreteNumber = SPUtils.getString(Constants.SECRET_NUMBER, "");
                                 if (!TextUtils.isEmpty(secreteNumber)) {
                                     binding.callTypeTvSecretNumber.setText(secreteNumber);
                                 } else {
                                     // 随机一个
                                     String phone = getRandomPhone();
-                                    SPUtils.put(SECRETE_NUMBER, phone);
+                                    SPUtils.put(Constants.SECRET_NUMBER, phone);
                                     binding.callTypeTvSecretNumber.setText(phone);
                                 }
                             } else {
@@ -187,7 +188,7 @@ public class SetSecretInfoActivity extends BaseActivity {
                 while (randomPhone.equals(nowPhone)) {
                     randomPhone = getRandomPhone();
                 }
-                SPUtils.put(SECRETE_NUMBER, randomPhone);
+                SPUtils.put(Constants.SECRET_NUMBER, randomPhone);
                 saveChangeTime();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -204,7 +205,7 @@ public class SetSecretInfoActivity extends BaseActivity {
 
     private boolean checkChangeTime() {
         String s = SPUtils.getString(CHANGE_NUMBER_TIME, "");
-        int times = SPUtils.getInt(SP_TIMES, defaultTimes);
+        int usedTimes = SPUtils.getInt(SP_USED_TIMES, 0);
         long lastTime = 0;
         try {
             lastTime = Long.parseLong(s);
@@ -217,14 +218,12 @@ public class SetSecretInfoActivity extends BaseActivity {
         // 秒->小时
         long hour = duration / 3600;
         if (hour >= hours) {
-            if (times <= 0) {
-                // 复原
-                SPUtils.put(SP_TIMES, defaultTimes);
-            }
+            // 超过指定时间了，复原
+            SPUtils.put(SP_USED_TIMES, 0);
             return true;
         } else {
             // 判断次数
-            if (times <= 0) {
+            if (usedTimes > defaultTimes) {
                 ToastUtil.show(String.format("为了防止恶意拨号，每%s小时只可更换%s次隐私号，请稍等再试！", hours, defaultTimes));
                 return false;
             } else {
@@ -236,8 +235,8 @@ public class SetSecretInfoActivity extends BaseActivity {
     private void saveChangeTime() {
         long l = System.currentTimeMillis() / 1000;
         SPUtils.put(CHANGE_NUMBER_TIME, String.valueOf(l));
-        int anInt = SPUtils.getInt(SP_TIMES, defaultTimes);
-        SPUtils.put(SP_TIMES, anInt - 1);
+        int anInt = SPUtils.getInt(SP_USED_TIMES, 0);
+        SPUtils.put(SP_USED_TIMES, ++anInt);
     }
 
     private Handler handler = new Handler(Looper.getMainLooper());

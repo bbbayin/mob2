@@ -132,21 +132,17 @@ public class Utils {
         return null;
     }
 
-    public static List<PhoneAccountHandle> getAccountHandles(Context context) {
-        Class c;
-        Method m;
-        TelecomManager telecomManager;
-        List<PhoneAccountHandle> accountHandles = new ArrayList<>();
-        try {
-            c = Class.forName("android.telecom.TelecomManager");
-            Method m1 = c.getMethod("from", Context.class);
-            telecomManager = (TelecomManager) m1.invoke(null, context);
-            m = c.getMethod("getCallCapablePhoneAccounts");
-            accountHandles = (List<PhoneAccountHandle>) m.invoke(telecomManager);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static List<PhoneAccountHandle> getAccountHandles(Activity context) {
+        TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        if (telecomManager != null) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.READ_PHONE_NUMBERS}, 1);
+            }else {
+                return telecomManager.getCallCapablePhoneAccounts();
+            }
         }
-        return accountHandles;
+        return new ArrayList<>();
     }
 
     public static void showDialog(Activity activity, String content,
