@@ -24,28 +24,7 @@ public class FreeCheckUtils {
     }
 
     public static void check(Activity activity, boolean isSecretCall, OnCheckCallback callback) {
-        if (GlobalConfig.isVip) {
-            callback.onResult(true);
-        } else {
-            long duration = System.currentTimeMillis() - lastCheckTime;
-            long seconds = duration / 1000;
-            lastCheckTime = System.currentTimeMillis();
-            // 小于1分钟 且 是vip不用重复校验
-            if (seconds < 60 && isFree && callback != null) {
-                callback.onResult(true);
-            } else {
-                checkPermission(activity, isSecretCall, callback);
-            }
-        }
-//        long duration = System.currentTimeMillis() - lastCheckTime;
-//        long seconds = duration / 1000;
-//        lastCheckTime = System.currentTimeMillis();
-//        // 小于1分钟 且 是vip不用重复校验
-//        if (seconds < 60 && isFree && callback != null) {
-//            callback.onResult(true);
-//        } else {
-//            checkPermission(activity, isSecretCall, callback);
-//        }
+        checkPermission(activity, isSecretCall, callback);
     }
 
     private static void checkPermission(Activity activity, boolean isSecretCall, OnCheckCallback callback) {
